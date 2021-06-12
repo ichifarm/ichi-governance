@@ -1,159 +1,123 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.7.6;
+pragma solidity 0.8.3;
 
-import "./SafeMath.sol";
+import "./lib/AddressSet.sol";
+import "./interfaces/ISatellite.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-interface IERC20 {
-    function balanceOf(address account) external view returns (uint256);
-}
+contract ICHIPowah is Ownable {
 
-interface IPair {
-    function totalSupply() external view returns (uint256);
-    function balanceOf(address account) external view returns (uint256);
-    function getReserves() external view returns (uint112, uint112, uint32);
-}
+    using SafeMath for uint;
+    using AddressSet for AddressSet.Set;
 
-interface IStake {
-    function totalSupply() external view returns (uint256);
-    function balanceOf(address account) external view returns (uint256);
-}
+    uint public constant PRECISION = 100;
 
-interface IFarm {
-    function userInfo(uint256 nr, address who) external view returns (uint256, uint256);
-    function pendingIchi(uint256 nr, address who) external view returns (uint256);
-    function pendingBonusIchi(uint256 _poolID, address _user) external view returns (uint256);
-}
+    // a Constituency contains balance information that can be interpreted by an interpreter
+    struct Constituency {
+        address interpreter;
+        uint16 weight; // 100 = 100%
+    }
+    // constituency address => details
+    mapping(address => Constituency) public constituencies; 
+    // interable key set with delete
+    AddressSet.Set constituencySet;
 
-contract ICHIPOWAH {
-  using SafeMath for uint256;
+    event NewConstituency(address instance, address interpreter, uint16 weight);
+    event UpdateConstituency(address instance, address interpreter, uint16 weight);
+    event DeleteConstituency(address instance);
 
-  address public admin;
+    /**
+     * @notice user voting power reported through a normal ERC20 function 
+     * @dev TODO: Add stubs to support other unused other ERC20 functions?
+     * @param user the user to inspect
+     * @param powah user's voting power
+     */    
+    function balanceOf(address user) public view returns(uint powah) {
+        uint count = constituencySet.count();
+        for(uint i=0; i<count; i++) {
+            address instance = constituencySet.keyAtIndex(i);
+            Constituency storage c = constituencies[instance];
+            powah = powah.add(ISatellite(c.interpreter).getPowah(instance, user).mul(c.weight).div(PRECISION));
+        }
+    }
 
-  IFarm public ICHIFarm;
+    /**
+     * @notice adjusted total supply factor (for computing quorum) is the weight-adjusted sum of all possible votes
+     * @dev complete participation by weighted votes by all voters should equal the supply
+     * @param supply the total number of votes possible given circulating supply and weighting
+     */
+    function totalSupply() public view returns(uint supply) {
+        uint count = constituencySet.count();
+        for(uint i=0; i<count; i++) {
+            address instance = constituencySet.keyAtIndex(i);
+            Constituency storage c = constituencies[instance];
+            supply = supply.add(ISatellite(c.interpreter).getSupply(instance).mul(c.weight).div(PRECISION));
+        }
+    }
 
-  struct ICHIPowahItem {
-    address a;
-    bool active;
-    int8 multiplier;
-  }
+    /*********************************
+     * Discoverable Internal Structure
+     *********************************/
 
-  mapping (address => ICHIPowahItem ) public pairs;
-  mapping (address => ICHIPowahItem ) public LProviders;
-  mapping (address => ICHIPowahItem ) public stakedTokens;
+    /**
+     * @notice count configured constituencies
+     * @param count number of constituencies configured
+     */
+    function constituencyCount() public view returns(uint count) {
+        count = constituencySet.count();
+    }
 
-  event AddPair(address indexed pair);
-  event AddLProvider(address indexed LProvider);
-  event AddStaked(address indexed stakedToken);
-  
-  function name() public pure returns(string memory) { return "ICHIPOWAH"; }
-  function symbol() public pure returns(string memory) { return "ICHIPOWAH"; }
-  function decimals() public pure returns(uint8) { return 9; }  
+    /**
+     * @notice enumerate the configured constituencies
+     * @param index row number to inspect
+     * @param constituency address of the contract where tokens are staked
+     */
+    function constituencyAtIndex(uint index) public view returns(address constituency) {
+        constituency = constituencySet.keyAtIndex(index);
+    }
 
-  constructor(address admin_, address farm_) {
-    admin= admin_;
-    ICHIFarm = IFarm(farm_);
-  }
+    /*********************************
+     * CRUD
+     *********************************/
 
-  /* addPair - adds traditional Liquidity Pairs that implement getReserves()
-  *
-  */
-  function addPair(address pair_, uint8 multlipler ) public {
-    require(msg.sender == admin, "ICHIPowah::addPair: Call must come from admin");
-    require(pairs[pair_] != true, "ICHIPowah::addPair: Pair already active");
-    pairs[pair_] = true;
+    /**
+     * @notice insert a new constituency to start counting as voting power
+     * @param constituency address of the contract to inspect
+     * @param interpreter address of the satellite that can interact with the type of contract at constituency address 
+     * @param weight scaling adjustment to increase/decrease voting power. 100 = 100% is correct in most cases
+     */
+    function insertConstituency(address constituency, address interpreter, uint16 weight) external onlyOwner {
+        constituencySet.insert(constituency, "ICHIPowah: constituency is already registered.");
+        Constituency storage c = constituencies[constituency];
+        c.interpreter = interpreter;
+        c.weight = weight;
+        emit NewConstituency(constituency, interpreter, weight);
+    }
 
-    emit AddPair(pair_);
-  }
+    /**
+     * @notice delete a constituency to stop counting as voting power
+     * @param constituency address of the contract to stop inspecting
+     */
+    function deleteConstituency(address constituency) external onlyOwner {
+        constituencySet.remove(constituency, "ICHIPowah: unknown instance");
+        delete constituencies[constituency];
+        emit DeleteConstituency(constituency);
+    }
 
-  /* addProviders - adds contract that implements special getReserves() function for the Liqudidity
-  *
-  */
-  function addProviders(address LProvider_) public {
-    require(msg.sender == admin, "ICHIPowah::addLProvider: Call must come from admin");
-    require(LProviders[LProvider_] != true, "ICHIPowah::addLProvider: LProvider already active");
-    LProviders[LProvider_] = true;
+    /**
+     * @notice update a constituency by overwriting all values (safe to remove and use 2-step delete, re-add)
+     * @param constituency address of the contract to inspect
+     * @param interpreter address of the satellite that can interact with the type of contract at constituency address 
+     * @param weight scaling adjustment to increase/decrease voting power. 100 = 100% is correct in most cases
+     */
+    function updateConstituency(address constituency, address interpreter, uint16 weight) external onlyOwner {
+        require(constituencySet.exists(constituency), "ICHIPowah unknown constituency");
+        Constituency storage c = constituencies[constituency];
+        c.interpreter = interpreter;
+        c.weight = weight;
+        emit UpdateConstituency(constituency, interpreter, weight);
+    }
 
-    emit AddLProvider(LProvider_);
-  }
-
-  /* addStakedToken - adds staked tokens to count for ICHI Powah
-  *
-  */
-  function addStakedToken(address stakedToken_) public {
-    require(msg.sender == admin, "ICHIPowah::addStakedToken: Call must come from admin");
-    require(stakedTokens[stakedToken_] != true, "ICHIPowah::addStakedToken: Staked Token already active");
-    stakedTokens[stakedToken_] = true;
-
-    emit AddStaked(stakedToken_);
-  }
-
-  function totalSupply() public view returns (uint256) {
-    IPair ichiETH = IPair(0x4EA9c6793C4931F25D0d08dd5Fe357Acb54814Ba);
-    IPair ichiOneETH = IPair(0x856910d60689AD844f2A96fcE5e0B8d4caF52188);
-    IPair ichiOneBTC = IPair(0x643E04f64326d4FF4596B977E4131deC317a7249);
-
-    IStake stake = IStake(0x70605a6457B0A8fBf1EEE896911895296eAB467E);
-    IERC20 ichi = IERC20(0x903bEF1736CDdf2A537176cf3C64579C3867A881);
-    
-    (uint256 ichi1, , ) = ichiOneBTC.getReserves();
-    (uint256 ichi2, , ) = ichiOneETH.getReserves();
-    (uint256 ichi3, , ) = ichiETH.getReserves();
-
-    uint256 lp_totalIchi = ichi1.add(ichi2).add(ichi3);
-
-    uint256 xIchi_totalIchi = ichi.balanceOf(address(stake));
-
-    return lp_totalIchi.mul(2).add(xIchi_totalIchi);
-  }
-
-  function getLpPowah(uint256 pid, IERC20 ichi, IPair pair, IFarm farm, address owner) public view returns (uint256) {
-    uint256 lp_totalIchi = ichi.balanceOf(address(pair));
-    uint256 lp_total = pair.totalSupply();
-    uint256 lp_balance = pair.balanceOf(owner);
-
-    // Add staked balance
-    (uint256 lp_stakedBalance, ) = farm.userInfo(pid, owner);
-    lp_balance = lp_balance.add(lp_stakedBalance);
-    
-    // LP voting power is 2x the users ICHI share in the pool.
-    uint256 lp_powah = lp_totalIchi.mul(lp_balance).div(lp_total).mul(2);
-
-    return lp_powah;
-  }
-
-  function getStakedPowah() public view returns (uint256 staked_powah) {
-
-  }
-
-  function balanceOf(address owner) public view returns (uint256) {
-
-
-    IPair ichiETH = IPair(0x4EA9c6793C4931F25D0d08dd5Fe357Acb54814Ba);
-    IPair ichiOneETH = IPair(0x856910d60689AD844f2A96fcE5e0B8d4caF52188);
-    IPair ichiOneBTC = IPair(0x643E04f64326d4FF4596B977E4131deC317a7249);
-
-    IStake stake = IStake(0x70605a6457B0A8fBf1EEE896911895296eAB467E);
-    IERC20 ichi = IERC20(0x903bEF1736CDdf2A537176cf3C64579C3867A881);
-
-    uint256 one_lp_powah = getLpPowah(1, ichi, ichiETH, farm, owner);
-    uint256 two_lp_powah = getLpPowah(2, ichi, ichiOneETH, farm, owner);
-    uint256 three_lp_powah = getLpPowah(3, ichi, ichiOneBTC, farm, owner);
-
-    uint256 xIchi_totalIchi = ichi.balanceOf(address(stake));
-    uint256 xIchi_balance = stake.balanceOf(owner);
-    uint256 xIchi_total = stake.totalSupply();
-    
-    // xICHI voting power is the users ICHI share in the stake
-    uint256 xIchi_powah = xIchi_totalIchi.mul(xIchi_balance).div(xIchi_total);
-    
-    uint256 lp_powah = one_lp_powah.add(two_lp_powah).add(three_lp_powah);
-
-    return lp_powah.add(xIchi_powah);
-  }
-
-  function allowance(address, address) public pure returns (uint256) { return 0; }
-  function transfer(address, uint256) public pure returns (bool) { return false; }
-  function approve(address, uint256) public pure returns (bool) { return false; }
-  function transferFrom(address, address, uint256) public pure returns (bool) { return false; }
 }
