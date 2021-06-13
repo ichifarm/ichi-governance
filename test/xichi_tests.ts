@@ -40,7 +40,7 @@ describe('xICHI_Powah', () => {
         })
         it('Check constituency added', async() => {
             await fixture.insertConstituency(xICHIPowah.address,xICHIAddress,hundred)
-            const constituency = await fixture.constituencyAtIndex(0)
+            const constituency = await fixture.constituencyAtIndex((await fixture.constituencyCount()).toNumber() - 1)
             expect(constituency == xICHIAddress)
         })
         it('getSupply should be > 1', async() => {
