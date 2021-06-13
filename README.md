@@ -1,5 +1,10 @@
 # ichi-governance
 
+ICHIPowah - https://etherscan.io/address/0xa1d90A83ee1920E47acBF5be08AA753284B1e575
+
+### Interperters
+- xICHI https://etherscan.io/address/0x5897e2121183404A225f80647a1BC11a362208Ed
+- 1INCH-ICHI Liquidity  https://etherscan.io/address/0x74a53159a3e73dF5EE024a4AF9bf1CFA2F4C1cC1#code
 
 
 ## Deprecated ICHIPowah Addresses
