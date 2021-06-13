@@ -30,7 +30,6 @@ contract ICHIPowah is Ownable {
 
     /**
      * @notice user voting power reported through a normal ERC20 function 
-     * @dev TODO: Add stubs to support other unused other ERC20 functions?
      * @param user the user to inspect
      * @param powah user's voting power
      */    
@@ -45,7 +44,6 @@ contract ICHIPowah is Ownable {
 
     /**
      * @notice adjusted total supply factor (for computing quorum) is the weight-adjusted sum of all possible votes
-     * @dev complete participation by weighted votes by all voters should equal the supply
      * @param supply the total number of votes possible given circulating supply and weighting
      */
     function totalSupply() public view returns(uint supply) {
