@@ -31,7 +31,7 @@ contract oneINCHPowah {
         ichi = ichiToken.balanceOf(address(stake));
     }
 
-    function getPowah(address instance, address user) public view returns (uint256 ichi) {
+    function getPowah(address instance, address user, bytes32 /*params*/) public view returns (uint256 ichi) {
         // get user wallet LP balance
         IStake LPToken = IStake(instance);
         IERC20 ichiToken = IERC20(ICHIaddress);

@@ -15,6 +15,7 @@ describe('xICHI_Powah', () => {
     let fixture: ICHIPowah
     const xICHIAddress = "0x70605a6457B0A8fBf1EEE896911895296eAB467E"
     const hundred = BigNumber.from(100)
+    const null_bytes = ethers.constants.HashZero
 
     beforeEach(async () => {
         
@@ -34,12 +35,12 @@ describe('xICHI_Powah', () => {
     describe('Return Values', async() => {
         it('Number of constituency should be 1', async() => {
             //can really only test this for forks on mainnet
-            await fixture.insertConstituency(xICHIPowah.address,xICHIAddress,hundred)
+            await fixture.insertConstituency(xICHIPowah.address,xICHIAddress,hundred, null_bytes)
             const count = await fixture.constituencyCount()
             expect(count.toNumber() == 1)
         })
         it('Check constituency added', async() => {
-            await fixture.insertConstituency(xICHIPowah.address,xICHIAddress,hundred)
+            await fixture.insertConstituency(xICHIPowah.address,xICHIAddress,hundred, null_bytes)
             const constituency = await fixture.constituencyAtIndex((await fixture.constituencyCount()).toNumber() - 1)
             expect(constituency == xICHIAddress)
         })
@@ -49,8 +50,8 @@ describe('xICHI_Powah', () => {
             expect(!supply.isZero)
         })
         it('getPowah shoud be > 1', async() => {
-            const wallet = "0xef03c219614c5b2532f9bE17f92E2CcB2c1Eb005"
-            const powah = await xICHIPowah.getPowah(xICHIAddress, wallet)
+            const wallet = '0xef03c219614c5b2532f9bE17f92E2CcB2c1Eb005'
+            const powah = await xICHIPowah.getPowah(xICHIAddress, wallet, null_bytes)
             expect(!powah.isNegative)
             expect(!powah.isZero)
         })

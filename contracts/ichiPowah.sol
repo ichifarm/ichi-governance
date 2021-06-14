@@ -14,18 +14,21 @@ contract ICHIPowah is Ownable {
 
     uint public constant PRECISION = 100;
 
+    bytes32 constant NULL_DATA = "";
+
     // a Constituency contains balance information that can be interpreted by an interpreter
     struct Constituency {
         address interpreter;
         uint16 weight; // 100 = 100%
+        bytes32 params;
     }
     // constituency address => details
     mapping(address => Constituency) public constituencies; 
     // interable key set with delete
     AddressSet.Set constituencySet;
 
-    event NewConstituency(address instance, address interpreter, uint16 weight);
-    event UpdateConstituency(address instance, address interpreter, uint16 weight);
+    event NewConstituency(address instance, address interpreter, uint16 weight, bytes32 params);
+    event UpdateConstituency(address instance, address interpreter, uint16 weight, bytes32 params);
     event DeleteConstituency(address instance);
 
     /**
@@ -38,7 +41,7 @@ contract ICHIPowah is Ownable {
         for(uint i=0; i<count; i++) {
             address instance = constituencySet.keyAtIndex(i);
             Constituency storage c = constituencies[instance];
-            powah = powah.add(ISatellite(c.interpreter).getPowah(instance, user).mul(c.weight).div(PRECISION));
+            powah = powah.add(ISatellite(c.interpreter).getPowah(instance, user, c.params).mul(c.weight).div(PRECISION));
         }
     }
 
@@ -86,12 +89,13 @@ contract ICHIPowah is Ownable {
      * @param interpreter address of the satellite that can interact with the type of contract at constituency address 
      * @param weight scaling adjustment to increase/decrease voting power. 100 = 100% is correct in most cases
      */
-    function insertConstituency(address constituency, address interpreter, uint16 weight) external onlyOwner {
+    function insertConstituency(address constituency, address interpreter, uint16 weight, bytes32 params) external onlyOwner {
         constituencySet.insert(constituency, "ICHIPowah: constituency is already registered.");
         Constituency storage c = constituencies[constituency];
         c.interpreter = interpreter;
         c.weight = weight;
-        emit NewConstituency(constituency, interpreter, weight);
+        c.params = params;
+        emit NewConstituency(constituency, interpreter, weight, params);
     }
 
     /**
@@ -110,12 +114,13 @@ contract ICHIPowah is Ownable {
      * @param interpreter address of the satellite that can interact with the type of contract at constituency address 
      * @param weight scaling adjustment to increase/decrease voting power. 100 = 100% is correct in most cases
      */
-    function updateConstituency(address constituency, address interpreter, uint16 weight) external onlyOwner {
+    function updateConstituency(address constituency, address interpreter, uint16 weight, bytes32 params) external onlyOwner {
         require(constituencySet.exists(constituency), "ICHIPowah unknown constituency");
         Constituency storage c = constituencies[constituency];
         c.interpreter = interpreter;
         c.weight = weight;
-        emit UpdateConstituency(constituency, interpreter, weight);
+        c.params = params;
+        emit UpdateConstituency(constituency, interpreter, weight, params);
     }
 
 }
