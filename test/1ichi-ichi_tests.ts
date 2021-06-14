@@ -23,7 +23,7 @@ describe('1INCH-ICHI', () => {
         const [deployer, user] = await ethers.getSigners()
 
         // 2
-        const oneINCHPowahFactory = await ethers.getContractFactory('oneINCHPowah')
+        const oneINCHPowahFactory = await ethers.getContractFactory('oneINCHICHIPowah')
         oneINCHPowah = (await oneINCHPowahFactory.deploy()) as OneINCHPowah
         await oneINCHPowah.deployed()
 

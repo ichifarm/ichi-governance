@@ -3,16 +3,16 @@ import {DeployFunction} from 'hardhat-deploy/types'
 import { getChainId } from 'hardhat'
 
 
-const oneINCHPowah: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const oneINCHICHIPowah: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const {deployer} = await hre.getNamedAccounts()
   const {deploy} = hre.deployments;
   const chainId = await getChainId()
   
-await deploy('oneINCHPowah', {
+await deploy('oneINCHICHIPowah', {
     from: deployer,
     log: true,
     }) 
 };
-export default oneINCHPowah
-oneINCHPowah.id = '1INCHPowah'
-oneINCHPowah.tags = ['1INCHPowah','interperter']
+export default oneINCHICHIPowah
+oneINCHICHIPowah.id = '1INCHICHIPowah'
+oneINCHICHIPowah.tags = ['1INCHICHIPowah','interperter']

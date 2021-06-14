@@ -16,7 +16,7 @@ interface IERC20 {
 // ichi-1inch LP token 0x1dcE26F543E591c27717e25294AEbbF59AD9f3a5
 // 1inch farm token 0x7dEd1B278D244f707214759C45c1540834890E95
 
-contract oneINCHPowah {
+contract oneINCHICHIPowah {
     using SafeMath for uint256;
 
     string public DESCRIPTION = "ICHIPowah Interperter for 1inch ichi LP tokens";
