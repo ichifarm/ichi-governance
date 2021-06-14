@@ -39,11 +39,6 @@ describe('1INCH-ICHI', () => {
             const count = await fixture.constituencyCount()
             expect(count.toNumber()).to.equal(1)
         })
-        it('Check constituency added', async() => {
-            await fixture.insertConstituency(oneINCHPowah.address,oneINCH_ICHI_Address,hundred, null_bytes)
-            const constituency = await fixture.constituencyAtIndex((await fixture.constituencyCount()).toNumber() - 1)
-            expect(constituency).to.equal(oneINCH_ICHI_Address)
-        })
         it('getSupply should be > 1', async() => {
             const supply = await oneINCHPowah.getSupply(oneINCH_ICHI_Address)
             expect(supply.isNegative()).to.equal(false)
