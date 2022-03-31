@@ -13,10 +13,6 @@ interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
 }
 
-interface IFarm {
-
-}
-
 contract ichiRariPowah {
     using SafeMath for uint256;
 
