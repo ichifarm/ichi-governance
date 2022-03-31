@@ -47,4 +47,5 @@ contract ichiRariPowah {
         uint256 xichi = xICHI_totalICHI.mul(rari_xICHI_balance).div(rari_xICHI_total);
         ichi = ichi.add(xichi);
     }
+}
 
