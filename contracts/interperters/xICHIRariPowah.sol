@@ -34,8 +34,8 @@ contract xICHIRariPowah {
 
         //Rari xICHI
         uint256 xICHI_totalICHI = ichiToken.balanceOf(address(stake));
-        uint256 rari_xICHI_balance = xICHIRariFA.balanceOfUnderlying(user);
-        uint256 rari_xICHI_total = xICHIRariFA.totalSupply();
+        uint256 rari_xICHI_balance = stake.balanceOfUnderlying(user);
+        uint256 rari_xICHI_total = stake.totalSupply();
         
         uint256 ichi = xICHI_totalICHI.mul(rari_xICHI_balance).div(rari_xICHI_total); 
     }
