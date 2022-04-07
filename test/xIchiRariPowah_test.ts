@@ -10,7 +10,7 @@ import { powahFixture } from '../lib/fixtures'
 chai.use(solidity);
 const { expect } = chai;
 
-describe('xICHI_Powah', () => {
+describe('xICHIRari_Powah', () => {
     let xICHIRariPowah: XICHIRariPowah
     let fixture: ICHIPowah
     const xICHIRariAddress = "0xb7Abc13dB4aeaEA90A17aE46291317Ef8554F076"
