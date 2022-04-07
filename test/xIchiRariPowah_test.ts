@@ -13,7 +13,7 @@ const { expect } = chai;
 describe('xICHI_Powah', () => {
     let xICHIRariPowah: XICHIRariPowah
     let fixture: ICHIPowah
-    const ICHIRariAddress = "0xaFf95ac1b0A78Bd8E4f1a2933E373c66CC89C0Ce"
+    const xICHIRariAddress = "0xb7Abc13dB4aeaEA90A17aE46291317Ef8554F076"
     const null_bytes = ethers.constants.HashZero
 
     beforeEach(async () => {
@@ -33,13 +33,13 @@ describe('xICHI_Powah', () => {
 
     describe('Return Values', async() => {
         it('getSupply should be > 1', async() => {
-            const supply = await xICHIRariPowah.getSupply(ICHIRariAddress)
+            const supply = await xICHIRariPowah.getSupply(xICHIRariAddress)
             expect(!supply.isNegative)
             expect(!supply.isZero)
         })
         it('getPowah shoud be > 1', async() => {
-            const wallet = '0xc8b5c6363ad036883fc663766ecd87928ad3dc36'
-            const powah = await xICHIRariPowah.getPowah(ICHIRariAddress, wallet, null_bytes)
+            const wallet = '0x4fe5f268e5053a05108ebaf13ebd9a825e6fb6f2'
+            const powah = await xICHIRariPowah.getPowah(xICHIRariAddress, wallet, null_bytes)
             expect(!powah.isNegative)
             expect(!powah.isZero)
         })
