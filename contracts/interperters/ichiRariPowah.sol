@@ -7,15 +7,13 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 interface IStake {
     function totalSupply() external view returns (uint256);
     function balanceOf(address account) external view returns (uint256);
+    function balanceOfUnderlying(address account) external view returns (uint256);
 }
 
 interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
 }
 
-interface IFarm {
-
-}
 
 contract ichiRariPowah {
     using SafeMath for uint256;
@@ -31,7 +29,7 @@ contract ichiRariPowah {
         ichi = ichiToken.balanceOf(address(stake));
     }
 
-    function getPowah(address instance, address user, bytes32 params) public view returns (uint256 ichi) {
+    function getPowah(address instance, address user, bytes32 /*params*/) public view returns (uint256 ichi) {
         IStake stake = IStake(instance);
         
         //Rari ICHI
