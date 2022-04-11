@@ -1,7 +1,6 @@
 import { ethers } from 'hardhat'
 import chai from 'chai'
 import { solidity } from 'ethereum-waffle'
-import { BigNumber } from 'ethers'
 import { XICHIRariPowah } from '../typechain/xICHIRariPowah'
 import { ICHIPowah } from '../typechain/ICHIPowah'
 import { powahFixture } from '../lib/fixtures'
@@ -32,16 +31,15 @@ describe('xICHIRari_Powah', () => {
     })
 
     describe('Return Values', async() => {
-        it('getSupply should be > 1', async() => {
+        it.only('getSupply should be > 1', async() => {
             const supply = await xICHIRariPowah.getSupply(xICHIRariAddress)
             expect(!supply.isNegative)
             expect(!supply.isZero)
         })
-        it('getPowah shoud be > 1', async() => {
+        it('getPowah shoud be ', async() => {
             const wallet = '0x4fe5f268e5053a05108ebaf13ebd9a825e6fb6f2'
             const powah = await xICHIRariPowah.getPowah(xICHIRariAddress, wallet, null_bytes)
-            expect(!powah.isNegative)
-            expect(!powah.isZero)
+            expect(powah).to.equal(222);
         })
     })
 })

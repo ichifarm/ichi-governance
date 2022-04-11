@@ -2,7 +2,7 @@ import { ethers } from 'hardhat'
 import chai from 'chai'
 import { solidity } from 'ethereum-waffle'
 import { BigNumber } from 'ethers'
-import { ICHIRariPowah } from '../typechain/ICHIRariPowah'
+import { IchiRariPowah } from '../typechain/IchiRariPowah'
 import { ICHIPowah } from '../typechain/ICHIPowah'
 import { powahFixture } from '../lib/fixtures'
 
@@ -11,7 +11,7 @@ chai.use(solidity);
 const { expect } = chai;
 
 describe('ICHIRari_Powah', () => {
-    let ICHIRari: ICHIRariPowah
+    let ICHIRari: IchiRariPowah
     let fixture: ICHIPowah
     const ICHIRariAddress = "0xaFf95ac1b0A78Bd8E4f1a2933E373c66CC89C0Ce"
     const null_bytes = ethers.constants.HashZero
@@ -22,8 +22,8 @@ describe('ICHIRari_Powah', () => {
         const [deployer, user] = await ethers.getSigners()
 
         // 2
-        const ICHIRariFactory = await ethers.getContractFactory('xICHIRariPowah')
-        ICHIRari = (await ICHIRariFactory.deploy()) as ICHIRariPowah
+        const ICHIRariFactory = await ethers.getContractFactory('xIchiRariPowah')
+        ICHIRari = (await ICHIRariFactory.deploy()) as IchiRariPowah
         await ICHIRari.deployed()
 
         // 3 
