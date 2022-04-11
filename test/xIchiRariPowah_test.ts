@@ -24,22 +24,22 @@ describe('xICHIRari_Powah', () => {
         const xICHIRariPowahFactory = await ethers.getContractFactory('xICHIRariPowah')
         xICHIRariPowah = (await xICHIRariPowahFactory.deploy()) as XICHIRariPowah
         await xICHIRariPowah.deployed()
-
         // 3 
         fixture = (await powahFixture()).fixture
 
     })
 
     describe('Return Values', async() => {
-        it.only('getSupply should be > 1', async() => {
-            const supply = await xICHIRariPowah.getSupply(xICHIRariAddress)
-            expect(!supply.isNegative)
-            expect(!supply.isZero)
+        it('getSupply should be > 1', async() => {
+            const supply = await xICHIRariPowah.getSupply(xICHIRariAddress);
+            expect(!supply.isNegative);
+            expect(!supply.isZero);
         })
         it('getPowah shoud be ', async() => {
-            const wallet = '0x4fe5f268e5053a05108ebaf13ebd9a825e6fb6f2'
-            const powah = await xICHIRariPowah.getPowah(xICHIRariAddress, wallet, null_bytes)
-            expect(powah).to.equal(222);
+            const wallet = '0x4fe5f268e5053a05108ebaf13ebd9a825e6fb6f2';
+            const powah = await xICHIRariPowah.getPowah(xICHIRariAddress, wallet, null_bytes);
+            expect(!powah.isNegative);
+            expect(!powah.isZero);
         })
     })
 })

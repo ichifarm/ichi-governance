@@ -12,6 +12,7 @@ interface IStake {
 
 interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
+    function totalSupply() external view returns (uint256);
 }
 
 
@@ -26,8 +27,14 @@ contract xICHIRariPowah {
     function getSupply(address instance) public view returns (uint256 ichi) {
         IStake stake = IStake(instance);
         IERC20 ichiToken = IERC20(ICHIaddress);
+        IERC20 xIchiToken = IERC20(XICHIaddress);
 
-        ichi = ichiToken.balanceOf(address(stake));
+
+        uint256 xICHI_totalICHI = ichiToken.balanceOf(address(xIchiToken));
+        uint256 rari_totalxICHI_balance = xIchiToken.balanceOf(address(stake));
+        uint256 xICHI_total = xIchiToken.totalSupply();
+
+        ichi = xICHI_totalICHI.mul(rari_totalxICHI_balance).div(xICHI_total); 
     }
 
     function getPowah(address instance, address user, bytes32 /*params*/) public view returns (uint256 ichi) {
@@ -36,7 +43,7 @@ contract xICHIRariPowah {
         IERC20 xIchiToken = IERC20(XICHIaddress);
 
         //Rari xICHI
-        uint256 xICHI_totalICHI = ichiToken.balanceOf(XICHIaddress);
+        uint256 xICHI_totalICHI = ichiToken.balanceOf(xIchiToken);
         uint256 rari_xICHI_balance = stake.balanceOfUnderlying(user);
         uint256 xICHI_total = xIchiToken.totalSupply();
         
