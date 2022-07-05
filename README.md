@@ -43,8 +43,8 @@ We iterate over all the constituencies, making an instance for each, and then ch
 
 This is a contract template that that implements ISatelite and acts as the medium between ICHIPowah and individual constituencies for communicating user data. Each contract implements two functions - 
 
-     - getPowah() 
-     - getSupply()
+ - getPowah() 
+ - getSupply()
     
  ### Available Interpreters
  
