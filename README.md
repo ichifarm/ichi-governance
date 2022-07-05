@@ -23,9 +23,9 @@ The different liquidity pools/products mentioned above are referred to as **cons
 
 This [contract](ICHIPowah%20-%20https://etherscan.io/address/0x873902a3c0731ecc1f2075435fe035acceed5459) stores metadata about each constituency is stored in a solidity struct. The struct - 
 
-    - Specifies which interpreter* is acting on it
-    - the weight the constituency has in the governance
-    - Other information
+ - Specifies which interpreter* is acting on it
+ - the weight the constituency has in the governance
+ - Other information
 
 In keeping with CRUD, we then define a set of all the available constituencies. Each item in the set specifies a constituency and holds an array of addresses of users invested in it. There is also an option to store additional data. 
 
