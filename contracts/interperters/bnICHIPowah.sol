@@ -21,14 +21,12 @@ contract bnICHIPowah {
     address public BancorICHIAddress = 0x36FAbE4cAeF8c190550b6f93c306A5644E7dCef6; //bancor pool address
 
     function getSupply(address instance) public view returns (uint256 bnIchi) {
-        IStake stake = IStake(instance);
-        IERC20 bnIchiToken = IERC20(BancorICHIAddress);
-
-        bnIchi = bnIchiToken.balanceOf(address(stake));
+        IStake bnIchiTokenStake = IStake(instance);
+        bnIchi = bnIchiTokenStake.totalSupply();
     }
 
-    function getPowah(address /*instance*/ , address user, bytes32 /*params*/) public view returns (uint256 bnIchi) {
-        IERC20 bnIchiToken = IERC20(BancorICHIAddress);
+    function getPowah(address instance, address user, bytes32 /*params*/) public view returns (uint256 bnIchi) {
+        IERC20 bnIchiToken = IERC20(instance);
         bnIchi = bnIchiToken.balanceOf(user);
     }
 }
