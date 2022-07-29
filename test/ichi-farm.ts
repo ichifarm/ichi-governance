@@ -67,7 +67,7 @@ describe('ICHI-Farm', () => {
         it('getPowah shoud be > 1 ICHI-LINK', async() => {
             const poolid = "0x0000000000000000000000000000000000000000000000000000000000000008"
             const LPToken = "0x960c437E2A9A9a25e0FEDC0C8A5899827B10F63c"
-            const wallet = "0x18Cc17a1EeD37C02A77B0B96b7890C7730E2a2CF"
+            const wallet = "0x7a09696e30192974d732ceb3e82e1306385886ff"
             const powah = await ICHIFarmPowah.getPowah(LPToken, wallet, poolid)
             console.log(powah.toString())
             expect(powah.isNegative()).to.equal(false)

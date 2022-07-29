@@ -11,6 +11,7 @@ import 'hardhat-gas-reporter'
 import 'hardhat-spdx-license-identifier'
 import 'dotenv/config'
 import "hardhat-watcher";
+import { hardhatArguments } from 'hardhat';
 
 //import { HardhatUserConfig } from "hardhat/types";
 
@@ -58,8 +59,9 @@ const config: HardhatUserConfig = {
     },
     hardhat: {
       forking: {
-        enabled: process.env.FORKING === "false",
-        url: `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
+        enabled: process.env.FORKING === "true",
+        url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+        blockNumber: 13011904,
       },
       live: false,
       saveDeployments: true,

@@ -15,6 +15,25 @@ This repository specifies ICHI protocol's governance structure. Notably, ICHI fo
 
 As more partnerships and products are announced, we will be adding them here as well. 
 
+## Quick Setup 
+
+Ensure you add your infura env variable to pacakage.json at the following place - 
+
+```
+"ganache": "env-cmd -x ganache-cli -f https://mainnet.infura.io/v3/\\$INFURA_API_KEY --networkId * --allowUnlimitedContractSize --gasLimit 7989556 --gasPrice 100000000000 --mnemonic \"${MNEMONIC}\" ", 
+```
+
+And then sequentially execute - 
+
+```
+npm install 
+npx hardhat compile 
+npm run ganache 
+npm run test
+```
+
+Do note that the Ganache CLI needs to be run in a separate CLI environment. 
+
 ## Technical Overview 
 
 The different liquidity pools/products mentioned above are referred to as **constituencies** in our system.  Every user is registered in a set of constituencies - i.e the ICHI offerings/LP tokens they have chosen to use. 
@@ -48,7 +67,6 @@ This is a contract template that that implements ISatelite and acts as the mediu
     
  ### Available Interpreters
  
-
  1. [xICHI](https://etherscan.io/address/0x65e1a3555f2c544f84c97a385cc1dbe69da5ee6c)
  2. [1INCH-ICHI Liquidity](https://etherscan.io/address/0x9f493813d4ea0328d263bdcd8d486e914ec5ebc8)
  3. [ICHI-ETH Sushi Farm](https://etherscan.io/address/0x822b94df15fe9c60b35796be7b1e5e15ee225dd3)

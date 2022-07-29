@@ -18,8 +18,6 @@ contract bnICHIPowah {
 
     string public DESCRIPTION = "ICHIPowah Interperter for Bancor ICHI tokens";
 
-    address public BancorICHIAddress = 0x36FAbE4cAeF8c190550b6f93c306A5644E7dCef6; //bancor pool address
-
     function getSupply(address instance) public view returns (uint256 bnIchi) {
         IStake bnIchiTokenStake = IStake(instance);
         bnIchi = bnIchiTokenStake.totalSupply();

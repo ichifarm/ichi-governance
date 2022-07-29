@@ -11,4 +11,3 @@ export async function powahFixture(): Promise<PowahFixture> {
     const fixture = (await ichiPowahFactory.deploy()) as ICHIPowah
     return { fixture }
 }
-
