@@ -5,56 +5,56 @@ import { solidity } from "ethereum-waffle"
 import { BigNumber } from 'ethers'
 import { BnICHIPowah } from '../typechain/BnICHIPowah'
 import { ICHIPowah } from '../typechain/ICHIPowah'
-import { powahFixture } from '../lib/fixtures'
+import { bnICHIPowahFixture, ichiPowahFixture } from '../lib/fixtures'
 import { abi } from '@openzeppelin/contracts/build/contracts/IERC20.json'
 
 chai.use(solidity);
 const { expect } = chai;
 
 describe('bnICHI_Powah', () => {
-    let bnICHIPowah: BnICHIPowah
+    let bnICHIFixture: BnICHIPowah
     let bnICHIToken: Contract
-    let fixture: ICHIPowah
-    const BancorICHIAddress = "0x36FAbE4cAeF8c190550b6f93c306A5644E7dCef6"
+    let ICHIPowahFixture: ICHIPowah
+    let bnICHIWallet: string
+    let bnICHIAddress: string 
     const hundred = BigNumber.from(100)
     const null_bytes = ethers.constants.HashZero
 
     beforeEach(async () => {
         
         // 1
-        const [deployer, user] = await ethers.getSigners()
+        const [deployer] = await ethers.getSigners()
 
         // 2
-        const bnICHIPowahFactory = await ethers.getContractFactory('bnICHIPowah')
-        bnICHIPowah = (await bnICHIPowahFactory.deploy()) as BnICHIPowah
-        await bnICHIPowah.deployed()
+        bnICHIFixture = (await bnICHIPowahFixture()).bnICHIFixture
+        bnICHIWallet = (await bnICHIPowahFixture()).bnICHIWallet
+        bnICHIAddress = (await bnICHIPowahFixture()).bnICHIAddress
 
         // 3
-        fixture = (await powahFixture()).fixture
-        bnICHIToken = new Contract(BancorICHIAddress, abi, deployer);
+        ICHIPowahFixture = (await ichiPowahFixture()).fixture
+        bnICHIToken = new Contract(bnICHIAddress, abi, deployer);
     })
 
     describe('Return Values', async() => {
         it('Number of constituency should be 1', async() => {
             //can really only test this for forks on mainnet
-            await fixture.insertConstituency(bnICHIPowah.address,BancorICHIAddress,hundred, null_bytes)
-            const count = await fixture.constituencyCount()
+            await ICHIPowahFixture.insertConstituency(bnICHIFixture.address,bnICHIAddress,hundred, null_bytes)
+            const count = await ICHIPowahFixture.constituencyCount()
             expect(count.toNumber() >= 1)
         })
         it('Check constituency added', async() => {
-            await fixture.insertConstituency(bnICHIPowah.address,BancorICHIAddress,hundred, null_bytes)
-            const constituency = await fixture.constituencyAtIndex((await fixture.constituencyCount()).toNumber() - 1)
-            expect(constituency == BancorICHIAddress)
+            await ICHIPowahFixture.insertConstituency(bnICHIFixture.address,bnICHIAddress,hundred, null_bytes)
+            const constituency = await ICHIPowahFixture.constituencyAtIndex((await ICHIPowahFixture.constituencyCount()).toNumber() - 1)
+            expect(constituency == bnICHIAddress)
         })
         it('getSupply should be > 1', async() => {
-            const supply = await bnICHIPowah.getSupply(BancorICHIAddress)
+            const supply = await bnICHIFixture.getSupply(bnICHIAddress)
             expect(!supply.isNegative)
             expect(!supply.isZero)
         })
         it('getPowah should produce accurate value', async() => {
-            const wallet = '0x62a874497db511f7e4c8d6eeaaf61daf39e43aa4'
-            const calculated_powah = await bnICHIPowah.getPowah(BancorICHIAddress, wallet, null_bytes)
-            const expected_powah = await bnICHIToken.balanceOf(wallet);
+            const calculated_powah = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
+            const expected_powah = await bnICHIToken.balanceOf(bnICHIWallet);
             expect(calculated_powah.eq(expected_powah));
         })
     })
