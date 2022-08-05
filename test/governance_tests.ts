@@ -20,7 +20,8 @@ const { expect } = chai;
 const createFixtureLoader = waffle.createFixtureLoader;
 
 describe("System Level Testing", () => {
-  const [wallet, alice, bob, carol, other] = waffle.provider.getWallets();
+  const provider = waffle.provider;
+  const [wallet, governor, minter, other0, other1] = provider.getWallets()
 
   let fixture: ICHIPowah;
 
@@ -65,7 +66,7 @@ describe("System Level Testing", () => {
 
   let loadFixture: ReturnType<typeof createFixtureLoader>;
   before("create fixture loader", async () => {
-    loadFixture = createFixtureLoader([wallet, other]);
+    loadFixture = createFixtureLoader([wallet, governor]);
   });
 
   beforeEach(async () => {
@@ -101,6 +102,11 @@ describe("System Level Testing", () => {
       bnICHIAddress,
       bnICHIWallet,
     } = await loadFixture(ichiGovernanceTestFixture));
+
+    const constitCount = await fixture.constituencyCount()
+
+    console.log(`Total number of constits - ${constitCount}`)
+
   });
 
   describe("Return Values", async () => {});

@@ -6,6 +6,7 @@ import { OneINCHICHIPowah } from "../typechain/oneINCHICHIPowah";
 import { SushiICHIPowah } from "../typechain/sushiICHIPowah";
 import { XICHIPowah } from "../typechain/xICHIPowah";
 import { ICHIPowah } from "../typechain/ICHIPowah";
+import { BigNumber } from 'ethers'
 
 import { Fixture } from "ethereum-waffle";
 
@@ -212,6 +213,19 @@ export const ichiGovernanceTestFixture: Fixture<ICHIGovernanceTestFixture> =
     } = await ichiFarmPowahFixture();
     const { bnICHIFixture, bnICHIAddress, bnICHIWallet } =
       await bnICHIPowahFixture();
+    const hundred = BigNumber.from(100)
+    const null_bytes = ethers.constants.HashZero
+  
+
+    await fixture.insertConstituency(bnICHIFixture.address,bnICHIAddress,hundred, null_bytes)
+    await fixture.insertConstituency(oneINCHICHIFixture.address,oneINCHICHIAddress,hundred, null_bytes)
+    await fixture.insertConstituency(ichiBancorFixture.address,ichiBancorInsuranceLP,hundred, ichiBancorInsurancePoolID)
+    await fixture.insertConstituency(sushiICHIFixture.address,ethICHIWallet,hundred, sushiICHIPoolID)
+
+    await fixture.insertConstituency(ichiFarmFixture.address,ichiEthLP,hundred, ichiEthPoolID)
+    await fixture.insertConstituency(ichiFarmFixture.address,ichiLinkLP,hundred, ichiLinkWallet)
+    await fixture.insertConstituency(ichiFarmFixture.address,ichiEthUniLP,hundred, ichiEthUniLP)
+    await fixture.insertConstituency(xICHIfixture.address,xICHIAddress,hundred, null_bytes)
 
     return {
       fixture,
