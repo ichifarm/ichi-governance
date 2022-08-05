@@ -4,7 +4,7 @@
   "description": "ICHI.org Governance - Voting",
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test --deploy-fixture --network hardhat",
+    "test": "hardhat test ./test/governance_tests.ts --deploy-fixture --network localhost",
     "lint": "prettier ./test/**/*.ts --check",
     "prepublishOnly": "yarn test",
     "ganache": "env-cmd -x ganache-cli -f https://mainnet.infura.io/v3/a858aa27ae34454293c46473a1342b45 --networkId * --allowUnlimitedContractSize --gasLimit 7989556 --gasPrice 100000000000 --mnemonic \"${MNEMONIC}\" "

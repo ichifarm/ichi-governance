@@ -179,8 +179,7 @@ type ICHIGovernanceTestFixture = ICHIPowahFixture &
   ICHIFarmPowahFixture &
   BnICHIPowahFixture;
 
-export const ichiGovernanceTestFixture: Fixture<ICHIGovernanceTestFixture> =
-  async function (): Promise<ICHIGovernanceTestFixture> {
+export async function ichiGovernanceTestFixture(): Promise<ICHIGovernanceTestFixture> {
     const { fixture } = await ichiPowahFixture();
     const { xICHIfixture, xICHIWallet, xICHIAddress } =
       await xICHIPowahFixture();
@@ -223,7 +222,7 @@ export const ichiGovernanceTestFixture: Fixture<ICHIGovernanceTestFixture> =
     await fixture.insertConstituency(sushiICHIFixture.address,ethICHIWallet,hundred, sushiICHIPoolID)
 
     await fixture.insertConstituency(ichiFarmFixture.address,ichiEthLP,hundred, ichiEthPoolID)
-    await fixture.insertConstituency(ichiFarmFixture.address,ichiLinkLP,hundred, ichiLinkWallet)
+    await fixture.insertConstituency(ichiFarmFixture.address,ichiLinkLP,hundred, ichiLinkLP)
     await fixture.insertConstituency(ichiFarmFixture.address,ichiEthUniLP,hundred, ichiEthUniLP)
     await fixture.insertConstituency(xICHIfixture.address,xICHIAddress,hundred, null_bytes)
 

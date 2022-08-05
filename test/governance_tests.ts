@@ -17,12 +17,7 @@ import { ichiGovernanceTestFixture } from "../lib/fixtures";
 chai.use(solidity);
 const { expect } = chai;
 
-const createFixtureLoader = waffle.createFixtureLoader;
-
 describe("System Level Testing", () => {
-  const provider = waffle.provider;
-  const [wallet, governor, minter, other0, other1] = provider.getWallets()
-
   let fixture: ICHIPowah;
 
   let bnICHIFixture: BnICHIPowah;
@@ -62,12 +57,8 @@ describe("System Level Testing", () => {
   let oneINCHICHIAddress: string;
 
   const hundred = BigNumber.from(100);
+  const twoHundred = BigNumber.from(200);
   const null_bytes = ethers.constants.HashZero;
-
-  let loadFixture: ReturnType<typeof createFixtureLoader>;
-  before("create fixture loader", async () => {
-    loadFixture = createFixtureLoader([wallet, governor]);
-  });
 
   beforeEach(async () => {
     // 1
@@ -101,13 +92,55 @@ describe("System Level Testing", () => {
       bnICHIFixture,
       bnICHIAddress,
       bnICHIWallet,
-    } = await loadFixture(ichiGovernanceTestFixture));
-
-    const constitCount = await fixture.constituencyCount()
-
-    console.log(`Total number of constits - ${constitCount}`)
-
+    } = await ichiGovernanceTestFixture())
   });
 
-  describe("Return Values", async () => {});
+  describe("Return Values", async () => {
+    it('Number of constituency should be 8', async() => {
+      //can really only test this for forks on mainnet
+      console.log("Here")
+      const count = await fixture.constituencyCount()
+      console.log(count.toNumber())
+      expect(count.eq(8))
+    })
+    it('Check constituency added in correct order - first', async() => {
+      const bnICHIConstit1 = await fixture.constituencyAtIndex(0)      
+      expect(bnICHIAddress == bnICHIConstit1)
+    })
+    it('Check constituency added in correct order - last', async() => {
+      const xICHIConstit1 = await fixture.constituencyAtIndex(7)      
+      expect(xICHIAddress == xICHIConstit1)
+    })
+    it('Total supply should be greater than one', async() => {
+      const totalSupply = await fixture.totalSupply()      
+      expect(totalSupply.isNegative()).to.equal(false)
+      expect(totalSupply.isZero()).to.equal(false)
+    })
+    it('getPowah should produce accurate value for random user', async() => {
+      const expected_powah = await fixture.balanceOf("0x2ecda5574e4ae1b257eb439bc9930fb3aebef53a")
+      const calculated_powah = await ichiBancorFixture.getPowah(ichiBancorInsuranceLP, ichiBancorInsuranceWallet, ichiBancorInsurancePoolID)
+      expect(calculated_powah.eq(expected_powah));
+    })
+    it('Constituency should be succesfully deleted', async() => {
+      await fixture.deleteConstituency(bnICHIFixture.address)
+      const count = await fixture.constituencyCount()
+      expect(count.eq(7))
+    })
+    it('Deleted constituency should have no powah', async() => {
+      await fixture.deleteConstituency(bnICHIFixture.address)
+      const calculated_powah = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
+      const expected_powah = 0
+      expect(calculated_powah.eq(expected_powah));
+    })
+    it('Succesfully update constituency', async() => {
+      const calculated_powah_first = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
+      await fixture.updateConstituency(bnICHIFixture.address,bnICHIAddress,twoHundred, null_bytes)
+      const calculated_powah_second = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
+      expect(calculated_powah_second.toNumber() == (2 * calculated_powah_first.toNumber()));
+    })
+    it('Not succesfully update wrong constituency', async() => {
+      const badAddress = "0x3Dd7050e65a2557a78d9ddb3eD796860be735435"
+      await expect(fixture.updateConstituency(badAddress,bnICHIAddress,hundred, null_bytes)).to.be.revertedWith("ICHIPowah unknown constituency")
+    })
+  })
 });
