@@ -60,7 +60,7 @@ describe("System Level Testing", () => {
   const twoHundred = BigNumber.from(200);
   const null_bytes = ethers.constants.HashZero;
 
-  beforeEach(async () => {
+  before(async () => {
     // 1
     ({
       fixture,
@@ -98,7 +98,6 @@ describe("System Level Testing", () => {
   describe("Return Values", async () => {
     it('Number of constituency should be 8', async() => {
       //can really only test this for forks on mainnet
-      console.log("Here")
       const count = await fixture.constituencyCount()
       console.log(count.toNumber())
       expect(count.eq(8))
@@ -127,20 +126,19 @@ describe("System Level Testing", () => {
       expect(count.eq(7))
     })
     it('Deleted constituency should have no powah', async() => {
-      await fixture.deleteConstituency(bnICHIFixture.address)
       const calculated_powah = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
       const expected_powah = 0
       expect(calculated_powah.eq(expected_powah));
     })
     it('Succesfully update constituency', async() => {
-      const calculated_powah_first = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
-      await fixture.updateConstituency(bnICHIFixture.address,bnICHIAddress,twoHundred, null_bytes)
-      const calculated_powah_second = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
+      const calculated_powah_first = await xICHIfixture.getPowah(xICHIAddress, xICHIWallet, null_bytes)
+      await fixture.updateConstituency(xICHIfixture.address,xICHIAddress,twoHundred, null_bytes)
+      const calculated_powah_second = await xICHIfixture.getPowah(xICHIAddress, xICHIWallet, null_bytes)
       expect(calculated_powah_second.toNumber() == (2 * calculated_powah_first.toNumber()));
     })
     it('Not succesfully update wrong constituency', async() => {
       const badAddress = "0x3Dd7050e65a2557a78d9ddb3eD796860be735435"
-      await expect(fixture.updateConstituency(badAddress,bnICHIAddress,hundred, null_bytes)).to.be.revertedWith("ICHIPowah unknown constituency")
+      await expect(fixture.updateConstituency(badAddress,xICHIAddress,hundred, null_bytes)).to.be.revertedWith("ICHIPowah unknown constituency")
     })
   })
 });
