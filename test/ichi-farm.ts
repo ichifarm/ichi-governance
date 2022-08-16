@@ -54,7 +54,7 @@ describe('ICHI-Farm', () => {
 
     describe('Return Values', async() => {
         it('getSupply should be > 1 80/20 ICHI-ETH', async() => {
-            await ICHIPowahFixture.insertConstituency(ICHIFarmPowahFixture.address,ichiEthLP,hundred, ichiEthPoolID)
+            await ICHIPowahFixture.insertConstituency(ichiEthLP,ICHIFarmPowahFixture.address,hundred, ichiEthPoolID)
             const supply = await ICHIFarmPowahFixture.getSupply(ichiEthLP)
             console.log(supply.toString())
             expect(supply.isNegative()).to.equal(false)
@@ -67,7 +67,7 @@ describe('ICHI-Farm', () => {
             expect(powah.isZero()).to.equal(false)
         })
         it('getSupply should be > 1 ICHI-LINK', async() => {
-            await ICHIPowahFixture.insertConstituency(ICHIFarmPowahFixture.address,ichiLinkLP,hundred, ichiLinkPoolID)
+            await ICHIPowahFixture.insertConstituency(ichiLinkLP,ICHIFarmPowahFixture.address,hundred, ichiLinkPoolID)
             const supply = await ICHIFarmPowahFixture.getSupply(ichiLinkLP)
             console.log(supply.toString())
             expect(supply.isNegative()).to.equal(false)
@@ -80,7 +80,7 @@ describe('ICHI-Farm', () => {
             expect(powah.isZero()).to.equal(false)
         })
         it('getSupply should be > 1 ICHI-ETH UNI', async() => {
-            await ICHIPowahFixture.insertConstituency(ICHIFarmPowahFixture.address,ichiEthUniLP,hundred, ichiEthUniPoolID)
+            await ICHIPowahFixture.insertConstituency(ichiEthUniLP,ICHIFarmPowahFixture.address,hundred, ichiEthUniPoolID)
             const supply = await ICHIFarmPowahFixture.getSupply(ichiEthUniLP)
             console.log(supply.toString())
             expect(supply.isNegative()).to.equal(false)

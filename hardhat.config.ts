@@ -33,6 +33,9 @@ const config: HardhatUserConfig = {
     enabled: process.env.REPORT_GAS === "true",
     excludeContracts: ["contracts/mocks/", "contracts/libraries/"],
   },
+  mocha: {
+    timeout: 100000000
+  },
   namedAccounts: {
     deployer: {
       default: 0

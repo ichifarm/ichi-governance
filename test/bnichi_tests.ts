@@ -38,12 +38,12 @@ describe('bnICHI_Powah', () => {
     describe('Return Values', async() => {
         it('Number of constituency should be 1', async() => {
             //can really only test this for forks on mainnet
-            await ICHIPowahFixture.insertConstituency(bnICHIFixture.address,bnICHIAddress,hundred, null_bytes)
+            await ICHIPowahFixture.insertConstituency(bnICHIAddress,bnICHIFixture.address,hundred, null_bytes)
             const count = await ICHIPowahFixture.constituencyCount()
             expect(count.toNumber() >= 1)
         })
         it('Check constituency added', async() => {
-            await ICHIPowahFixture.insertConstituency(bnICHIFixture.address,bnICHIAddress,hundred, null_bytes)
+            await ICHIPowahFixture.insertConstituency(bnICHIAddress,bnICHIFixture.address,hundred, null_bytes)
             const constituency = await ICHIPowahFixture.constituencyAtIndex((await ICHIPowahFixture.constituencyCount()).toNumber() - 1)
             expect(constituency == bnICHIAddress)
         })

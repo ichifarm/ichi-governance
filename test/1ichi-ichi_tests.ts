@@ -30,7 +30,7 @@ describe('1INCH-ICHI', () => {
     describe('Return Values', async() => {
         it('Number of constituency should be 1', async() => {
             //can really only test this for forks on mainnet
-            await ICHIPowahFixture.insertConstituency(OneINCHICHIPowahFixture.address,oneINCHICHIAddress,hundred, null_bytes)
+            await ICHIPowahFixture.insertConstituency(oneINCHICHIAddress,OneINCHICHIPowahFixture.address,hundred, null_bytes)
             const count = await ICHIPowahFixture.constituencyCount()
             expect(count.toNumber()).to.equal(1)
         })
