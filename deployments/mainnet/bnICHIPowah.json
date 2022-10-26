@@ -1,0 +1,116 @@
+{
+  "address": "0x8C261C87288dd5E2dc462FA0fD4C6399a7F102eF",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "DESCRIPTION",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "instance",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getPowah",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "bnIchi",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "instance",
+          "type": "address"
+        }
+      ],
+      "name": "getSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "bnIchi",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x8bb7ab46cac01aed1f36e9651bbca61bd9da7ac35ca09b230017a2cd1c96d93c",
+  "receipt": {
+    "to": null,
+    "from": "0xC30220fc19e2db669eaa3fa042C07b28F0c10737",
+    "contractAddress": "0x8C261C87288dd5E2dc462FA0fD4C6399a7F102eF",
+    "transactionIndex": 157,
+    "gasUsed": "315600",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x20d06043bd040af882ef5c7c60e14d71dae36a86bbda9df30077c0b86fb38548",
+    "transactionHash": "0x8bb7ab46cac01aed1f36e9651bbca61bd9da7ac35ca09b230017a2cd1c96d93c",
+    "logs": [],
+    "blockNumber": 15834843,
+    "cumulativeGasUsed": "14882872",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "solcInputHash": "9ffbb8879bbb381f932bc9e4266c5c3b",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.3+commit.8d00100c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"DESCRIPTION\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"instance\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"getPowah\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"bnIchi\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"instance\",\"type\":\"address\"}],\"name\":\"getSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"bnIchi\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interperters/bnICHIPowah.sol\":\"bnICHIPowah\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/math/SafeMath.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n// CAUTION\\n// This version of SafeMath should only be used with Solidity 0.8 or later,\\n// because it relies on the compiler's built in overflow checks.\\n\\n/**\\n * @dev Wrappers over Solidity's arithmetic operations.\\n *\\n * NOTE: `SafeMath` is no longer needed starting with Solidity 0.8. The compiler\\n * now has built in overflow checking.\\n */\\nlibrary SafeMath {\\n    /**\\n     * @dev Returns the addition of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            uint256 c = a + b;\\n            if (c < a) return (false, 0);\\n            return (true, c);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the substraction of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b > a) return (false, 0);\\n            return (true, a - b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            // Gas optimization: this is cheaper than requiring 'a' not being zero, but the\\n            // benefit is lost if 'b' is also tested.\\n            // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522\\n            if (a == 0) return (true, 0);\\n            uint256 c = a * b;\\n            if (c / a != b) return (false, 0);\\n            return (true, c);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the division of two unsigned integers, with a division by zero flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b == 0) return (false, 0);\\n            return (true, a / b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b == 0) return (false, 0);\\n            return (true, a % b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the addition of two unsigned integers, reverting on\\n     * overflow.\\n     *\\n     * Counterpart to Solidity's `+` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Addition cannot overflow.\\n     */\\n    function add(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a + b;\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, reverting on\\n     * overflow (when the result is negative).\\n     *\\n     * Counterpart to Solidity's `-` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Subtraction cannot overflow.\\n     */\\n    function sub(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a - b;\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, reverting on\\n     * overflow.\\n     *\\n     * Counterpart to Solidity's `*` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Multiplication cannot overflow.\\n     */\\n    function mul(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a * b;\\n    }\\n\\n    /**\\n     * @dev Returns the integer division of two unsigned integers, reverting on\\n     * division by zero. The result is rounded towards zero.\\n     *\\n     * Counterpart to Solidity's `/` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function div(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a / b;\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),\\n     * reverting when dividing by zero.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function mod(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a % b;\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on\\n     * overflow (when the result is negative).\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {trySub}.\\n     *\\n     * Counterpart to Solidity's `-` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Subtraction cannot overflow.\\n     */\\n    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        unchecked {\\n            require(b <= a, errorMessage);\\n            return a - b;\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the integer division of two unsigned integers, reverting with custom message on\\n     * division by zero. The result is rounded towards zero.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Counterpart to Solidity's `/` operator. Note: this function uses a\\n     * `revert` opcode (which leaves remaining gas untouched) while Solidity\\n     * uses an invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        unchecked {\\n            require(b > 0, errorMessage);\\n            return a / b;\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),\\n     * reverting with custom message when dividing by zero.\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {tryMod}.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        unchecked {\\n            require(b > 0, errorMessage);\\n            return a % b;\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x2526b7c6a366fc211bbc176078ab02b83833e7682abcc5b3bed9d700b34e2a3e\",\"license\":\"MIT\"},\"contracts/interperters/bnICHIPowah.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.3;\\n\\nimport \\\"@openzeppelin/contracts/utils/math/SafeMath.sol\\\";\\n\\ninterface IStake {\\n    function totalSupply() external view returns (uint256);\\n    function balanceOf(address account) external view returns (uint256);\\n}\\n\\ninterface IERC20 {\\n    function balanceOf(address account) external view returns (uint256);\\n}\\n\\nuint256 constant NINE_DECIMALS = 1e9;\\n\\ncontract bnICHIPowah {\\n    using SafeMath for uint256;\\n\\n    string public DESCRIPTION = \\\"ICHIPowah Interperter for Bancor V3 ICHI tokens\\\";\\n\\n    function getSupply(address instance) public view returns (uint256 bnIchi) {\\n        IStake bnIchiTokenStake = IStake(instance);\\n        bnIchi = bnIchiTokenStake.totalSupply();\\n    }\\n\\n    function getPowah(address instance, address user, bytes32 /*params*/) public view returns (uint256 bnIchi) {\\n        IERC20 bnIchiToken = IERC20(instance);\\n        bnIchi = bnIchiToken.balanceOf(user);\\n    }\\n}\\n\\n\",\"keccak256\":\"0xbd5375e14bafbe2d50eddd431b5b194590d88b019a3204551777c1f2e72d5f8e\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60e0604052602f60808181529061049060a039805161002691600091602090910190610039565b5034801561003357600080fd5b5061010d565b828054610045906100d2565b90600052602060002090601f01602090048101928261006757600085556100ad565b82601f1061008057805160ff19168380011785556100ad565b828001600101855582156100ad579182015b828111156100ad578251825591602001919060010190610092565b506100b99291506100bd565b5090565b5b808211156100b957600081556001016100be565b600181811c908216806100e657607f821691505b6020821081141561010757634e487b7160e01b600052602260045260246000fd5b50919050565b6103748061011c6000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80631fd433aa14610046578063f1ae88561461006c578063ff80957714610081575b600080fd5b610059610054366004610243565b610094565b6040519081526020015b60405180910390f35b610074610112565b60405161006391906102b0565b61005961008f36600461025d565b6101a0565b600080829050806001600160a01b03166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b1580156100d357600080fd5b505afa1580156100e7573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061010b9190610298565b9392505050565b6000805461011f90610303565b80601f016020809104026020016040519081016040528092919081815260200182805461014b90610303565b80156101985780601f1061016d57610100808354040283529160200191610198565b820191906000526020600020905b81548152906001019060200180831161017b57829003601f168201915b505050505081565b6040516370a0823160e01b81526001600160a01b03838116600483015260009185918216906370a082319060240160206040518083038186803b1580156101e657600080fd5b505afa1580156101fa573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061021e9190610298565b95945050505050565b80356001600160a01b038116811461023e57600080fd5b919050565b600060208284031215610254578081fd5b61010b82610227565b600080600060608486031215610271578182fd5b61027a84610227565b925061028860208501610227565b9150604084013590509250925092565b6000602082840312156102a9578081fd5b5051919050565b6000602080835283518082850152825b818110156102dc578581018301518582016040015282016102c0565b818111156102ed5783604083870101525b50601f01601f1916929092016040019392505050565b600181811c9082168061031757607f821691505b6020821081141561033857634e487b7160e01b600052602260045260246000fd5b5091905056fea26469706673582212208053354003760ced67188e8a6cf969f946db549fd7f716f231146afa3edec4e764736f6c6343000803003349434849506f77616820496e74657270657274657220666f722042616e636f72205633204943484920746f6b656e73",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c80631fd433aa14610046578063f1ae88561461006c578063ff80957714610081575b600080fd5b610059610054366004610243565b610094565b6040519081526020015b60405180910390f35b610074610112565b60405161006391906102b0565b61005961008f36600461025d565b6101a0565b600080829050806001600160a01b03166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b1580156100d357600080fd5b505afa1580156100e7573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061010b9190610298565b9392505050565b6000805461011f90610303565b80601f016020809104026020016040519081016040528092919081815260200182805461014b90610303565b80156101985780601f1061016d57610100808354040283529160200191610198565b820191906000526020600020905b81548152906001019060200180831161017b57829003601f168201915b505050505081565b6040516370a0823160e01b81526001600160a01b03838116600483015260009185918216906370a082319060240160206040518083038186803b1580156101e657600080fd5b505afa1580156101fa573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061021e9190610298565b95945050505050565b80356001600160a01b038116811461023e57600080fd5b919050565b600060208284031215610254578081fd5b61010b82610227565b600080600060608486031215610271578182fd5b61027a84610227565b925061028860208501610227565b9150604084013590509250925092565b6000602082840312156102a9578081fd5b5051919050565b6000602080835283518082850152825b818110156102dc578581018301518582016040015282016102c0565b818111156102ed5783604083870101525b50601f01601f1916929092016040019392505050565b600181811c9082168061031757607f821691505b6020821081141561033857634e487b7160e01b600052602260045260246000fd5b5091905056fea26469706673582212208053354003760ced67188e8a6cf969f946db549fd7f716f231146afa3edec4e764736f6c63430008030033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 1024,
+        "contract": "contracts/interperters/bnICHIPowah.sol:bnICHIPowah",
+        "label": "DESCRIPTION",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_string_storage"
+      }
+    ],
+    "types": {
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
