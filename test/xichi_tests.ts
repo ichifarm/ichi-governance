@@ -35,22 +35,20 @@ describe('xICHI_Powah', () => {
             //can really only test this for forks on mainnet
             await ICHIPowahFixture.insertConstituency(xICHIAddress,xICHIFixture.address,hundred, null_bytes)
             const count = await ICHIPowahFixture.constituencyCount()
-            expect(count.toNumber() == 1)
+            expect(count.eq(1)).to.be.true;
         })
         it('Check constituency added', async() => {
             await ICHIPowahFixture.insertConstituency(xICHIAddress,xICHIFixture.address,hundred, null_bytes)
             const constituency = await ICHIPowahFixture.constituencyAtIndex((await ICHIPowahFixture.constituencyCount()).toNumber() - 1)
-            expect(constituency == xICHIAddress)
+            expect(constituency == xICHIAddress).to.be.true;
         })
         it('getSupply should be > 1', async() => {
             const supply = await xICHIFixture.getSupply(xICHIAddress)
-            expect(!supply.isNegative)
-            expect(!supply.isZero)
+            expect(supply.gt(0)).to.be.true;
         })
         it('getPowah shoud be > 1', async() => {
             const powah = await xICHIFixture.getPowah(xICHIAddress, xICHIWallet, null_bytes)
-            expect(!powah.isNegative)
-            expect(!powah.isZero)
+            expect(powah.gt(0)).to.be.true;
         })
     })
 })

@@ -37,13 +37,11 @@ describe('ICHI-Bancor-Insurance', () => {
         it('getSupply should be > 1 Bancor Insurance', async() => {
             await ICHIPowahFixture.insertConstituency(LPToken, ICHIBancorInsurance.address,hundred, poolid)
             const supply = await ICHIBancorInsurance.getSupply(LPToken)
-            console.log(supply.toString())
             expect(supply.isNegative()).to.equal(false)
             expect(supply.isZero()).to.equal(false)
         })
         it('getPowah shoud be > 1 Bancor Insurance', async() => {
             const powah = await ICHIBancorInsurance.getPowah(LPToken, wallet, poolid)
-            console.log(powah.toString())
             expect(powah.isNegative()).to.equal(false)
             expect(powah.isZero()).to.equal(false)
         })

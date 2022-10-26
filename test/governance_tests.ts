@@ -108,78 +108,75 @@ describe("System Level Testing", () => {
     
     it('Number of constituency should be 6', async() => {
       //can really only test this for forks on mainnet
-      const count = await fixture.constituencyCount()
-      expect(count.eq(6))
+      const count = await fixture.constituencyCount();
+      expect(count.eq(6)).to.be.true;
     })   
     // Check This
     it('Random user should have accurate powah', async() => {
-      const expectedPowah = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
-      const calculatedPowah = await fixture.balanceOf(bnICHIWallet)
-      expect(expectedPowah.eq(calculatedPowah))
+      const expectedPowah = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes);
+      const calculatedPowah = await fixture.balanceOf(bnICHIWallet);
+      expect(expectedPowah.eq(calculatedPowah)).to.be.true;
     })
     // Check This
     it('Zero user should have no powah', async() => {
       //can really only test this for forks on mainnet
-      const badAddress = "0x0000000000000000000000000000000000000000"
-      const badUserPowah = await fixture.balanceOf(badAddress)
-      console.log(badUserPowah)
-      expect(badUserPowah.isZero)
+      const badAddress = "0x0000000000000000000000000000000000000000";
+      const badUserPowah = await fixture.balanceOf(badAddress);
+      expect(badUserPowah.isZero()).to.be.true;
     })
     // Check This
     it('Bad user should have no powah', async() => {
       //can really only test this for forks on mainnet
-      const badAddress = "0x3Dd7050e65a2557a78d9ddb3eD796860be735435"
-      const badUserPowah = await fixture.balanceOf(badAddress)
-      console.log(badUserPowah)
-      expect(badUserPowah.isZero)
+      const badAddress = "0x3Dd7050e65a2557a78d9ddb3eD796860be735435";
+      const badUserPowah = await fixture.balanceOf(badAddress);
+      expect(badUserPowah.isZero()).to.be.true;
     })
     // Check This
     it('Total supply should be positive', async() => {
       const totalSupply = await fixture.totalSupply()
-      expect(!totalSupply.isNegative)
-      expect(!totalSupply.isZero)
+      expect(totalSupply.gt(0)).to.be.true;
     })
     it('Constituency should not be added twice', async() => {
       //can really only test this for forks on mainnet
       await expect(fixture.insertConstituency(ichiEthLP, ichiFarmFixture.address,hundred, ichiLinkPoolID)).to.be.revertedWith("ICHIPowah: constituency is already registered.")
     })
     it('Check constituency added in correct order - first', async() => {
-      const bnICHIConstit1 = await fixture.constituencyAtIndex(0)      
-      expect(bnICHIAddress == bnICHIConstit1)
+      const bnICHIConstit1 = await fixture.constituencyAtIndex(0) ;     
+      expect(bnICHIAddress == bnICHIConstit1).to.be.true;
     })
     it('Check constituency added in correct order - last', async() => {
       const xICHIConstit1 = await fixture.constituencyAtIndex(5)      
-      expect(xICHIAddress == xICHIConstit1)
+      expect(xICHIAddress == xICHIConstit1).to.be.true;
     })
     it('Constituency should be succesfully deleted', async() => {
-      await fixture.deleteConstituency(bnICHIAddress)
-      const count = await fixture.constituencyCount()
-      expect(count.eq(5))
+      await fixture.deleteConstituency(bnICHIAddress);
+      const count = await fixture.constituencyCount();
+      expect(count.eq(5)).to.be.true;
     })
     it('Deleted constituency cannot be removed again', async() => {
-      await fixture.deleteConstituency(bnICHIAddress)
-      await expect(fixture.deleteConstituency(bnICHIAddress)).to.be.revertedWith("ICHIPowah: unknown instance")
+      await fixture.deleteConstituency(bnICHIAddress);
+      await expect(fixture.deleteConstituency(bnICHIAddress)).to.be.revertedWith("ICHIPowah: unknown instance");
     })
     it('Succesfully update constituency', async() => {
-      const initialSupply = await ichiFarmFixture.getSupply(ichiEthUniLP)
-      await fixture.updateConstituency(ichiEthLP,ichiFarmFixture.address,twoHundred, ichiLinkPoolID)
-      const finalSupply = await ichiFarmFixture.getSupply(ichiEthUniLP)
-      expect(finalSupply.gte(initialSupply))
+      const initialSupply = await ichiFarmFixture.getSupply(ichiEthUniLP);
+      await fixture.updateConstituency(ichiEthLP,ichiFarmFixture.address,twoHundred, ichiLinkPoolID);
+      const finalSupply = await ichiFarmFixture.getSupply(ichiEthUniLP);
+      expect(finalSupply.gte(initialSupply)).to.be.true;
     })
     it('Not succesfully update wrong constituency', async() => {
-      const badAddress = "0x3Dd7050e65a2557a78d9ddb3eD796860be735435"
-      await expect(fixture.updateConstituency(badAddress,xICHIfixture.address,hundred, null_bytes)).to.be.revertedWith("ICHIPowah unknown constituency")
+      const badAddress = "0x3Dd7050e65a2557a78d9ddb3eD796860be735435";
+      await expect(fixture.updateConstituency(badAddress,xICHIfixture.address,hundred, null_bytes)).to.be.revertedWith("ICHIPowah unknown constituency");
     })
     it('Remove all constituencies without error', async() => {
-      await fixture.deleteConstituency(bnICHIAddress)
-      await fixture.deleteConstituency(oneINCHICHIAddress)
-      await fixture.deleteConstituency(ichiBancorInsuranceLP)
-      await fixture.deleteConstituency(ethICHIWallet)
-      await fixture.deleteConstituency(ichiEthLP)
-      await fixture.deleteConstituency(xICHIAddress)
+      await fixture.deleteConstituency(bnICHIAddress);
+      await fixture.deleteConstituency(oneINCHICHIAddress);
+      await fixture.deleteConstituency(ichiBancorInsuranceLP);
+      await fixture.deleteConstituency(ethICHIWallet);
+      await fixture.deleteConstituency(ichiEthLP);
+      await fixture.deleteConstituency(xICHIAddress);
 
-      const count = await fixture.constituencyCount()
-      expect(count.eq(0))
+      const count = await fixture.constituencyCount();
+      expect(count.eq(0)).to.be.true;
     })
   })
 });

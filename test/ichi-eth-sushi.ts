@@ -46,7 +46,6 @@ describe('ICHI-ETH-Sushi', () => {
         })
         it('getPowah shoud be > 1', async() => {
             const powah = await ICHIethSushiFixture.getPowah(ETH_ICHI_Address, wallet, poolid)
-            console.log(powah.toString())
             expect(powah.isNegative()).to.equal(false)
             expect(powah.isZero()).to.equal(false)
         })
