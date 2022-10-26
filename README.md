@@ -26,10 +26,10 @@ Ensure you add your infura env variable to pacakage.json at the following place 
 And then sequentially execute - 
 
 ```
-npm install 
-npx hardhat compile 
-npm run ganache 
-npm run test
+yarn install 
+yarn compile 
+yarn ganache 
+yarn test
 ```
 
 Do note that the Ganache CLI needs to be run in a separate CLI environment. 
