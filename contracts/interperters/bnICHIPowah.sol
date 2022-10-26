@@ -27,7 +27,7 @@ contract bnICHIPowah {
 
     function getPowah(address instance, address user, bytes32 /*params*/) public view returns (uint256 bnIchi) {
         IERC20 bnIchiToken = IERC20(instance);
-        bnIchi = bnIchiToken.balanceOf(user).div(NINE_DECIMALS);  //normalize to legacy ICHI 9 decimals
+        bnIchi = bnIchiToken.balanceOf(user);
     }
 }
 

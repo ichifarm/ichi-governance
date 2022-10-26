@@ -54,7 +54,7 @@ describe('bnICHI_Powah', () => {
         it('getPowah should produce accurate value', async() => {
             const calculated_powah = await bnICHIFixture.getPowah(bnICHIAddress, bnICHIWallet, null_bytes)
             const expected_powah = await bnICHIToken.balanceOf(bnICHIWallet);
-            expect(calculated_powah.eq(expected_powah.div(1e9))).to.be.true;
+            expect(calculated_powah.eq(expected_powah)).to.be.true;
         })
     })
 })
