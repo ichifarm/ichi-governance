@@ -18,7 +18,7 @@ uint256 constant NINE_DECIMALS = 1e9;
 contract bnICHIPowah {
     using SafeMath for uint256;
 
-    string public DESCRIPTION = "ICHIPowah Interperter for Bancor ICHI tokens";
+    string public DESCRIPTION = "ICHIPowah Interperter for Bancor V3 ICHI tokens";
 
     function getSupply(address instance) public view returns (uint256 bnIchi) {
         IStake bnIchiTokenStake = IStake(instance);
