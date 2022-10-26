@@ -10,8 +10,8 @@ This repository specifies ICHI protocol's governance structure. Notably, ICHI fo
  4. [ICHI-ETH 80/20 Balancer](https://etherscan.io/tx/0x8a73f6130f6fcc21e2fc13b004e45354ac0959eae123e94e01c1a6bca1fe5ee1) 
  5. [ICHI-LINK](https://etherscan.io/tx/0x494aff2dd887b62098d276d5a2a0ba2241fc9fc1c43cba3fb9535ef8551d4927) 
  6. [ICHI-ETH Uni](https://etherscan.io/tx/0x6076ee7b84ae157cd22197c158f0100096d06e6903c4e35bbaf3d65dde351e07) 
- 7. [ICHI-BNT LP Insurance](https://etherscan.io/tx/0xfaa3a4ad453f60f56cf747a1b0df635f2e542a4cc1f948c196ad9bd4ab650452)  
- 8. ICHI-BNT AngelVault
+ 7. [ICHI-BNT LP V2](https://etherscan.io/tx/0xfaa3a4ad453f60f56cf747a1b0df635f2e542a4cc1f948c196ad9bd4ab650452)  
+ 8. ICHI-BNT LP V3
 
 As more partnerships and products are announced, we will be adding them here as well. 
 
@@ -73,3 +73,8 @@ This is a contract template that that implements ISatelite and acts as the mediu
  4. [ICHI LP in ICHI Farm](https://etherscan.io/address/0x7c49fc7110ef49d080f1d0cfc57fad5f21515014)
  5. [ICHI in Bancor LP](https://etherscan.io/address/0x43f1cacdacd3fa65dbcbd56604b90e077fffbb83)
  6. ICHI in Bancor V3
+
+ ### Legacy and retired contracts
+
+https://etherscan.io/address/0x06899B9092aB29aB197C1588b326B13812Ba8A9d - Deprecated 14 June 2021 [block](https://etherscan.io/block/12635192)
+https://etherscan.io/address/0xD5b0A2a96907344A537Eb809A0B75b895492E2f8 - Deprecated 4 January 2021 [block](https://etherscan.io/block/11590591)
