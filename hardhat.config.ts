@@ -52,7 +52,7 @@ const config: HardhatUserConfig = {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: [`0x${process.env.MAINNET_PK}`],
       saveDeployments: true,
-      gasPrice: 20 * 1000000000,
+      gasPrice: 30 * 1000000000,
       chainId: 1,
     },
     localhost: {
@@ -70,14 +70,14 @@ const config: HardhatUserConfig = {
       saveDeployments: true,
       tags: ["test", "local"],
     },
-    kovan: {
-      url: `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
+    goerli: {
+      url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: [`0x${process.env.TESTNET_PK}`],
-      chainId: 42,
+      chainId: 5,
       live: true,
       saveDeployments: true,
       tags: ["staging"],
-      gasPrice: 20000000000,
+      gasPrice: 100000000000,
       gasMultiplier: 2
     },
   },
