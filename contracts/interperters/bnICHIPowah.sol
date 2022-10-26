@@ -13,6 +13,8 @@ interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
 }
 
+uint256 constant NINE_DECIMALS = 1e9;
+
 contract bnICHIPowah {
     using SafeMath for uint256;
 
@@ -25,7 +27,7 @@ contract bnICHIPowah {
 
     function getPowah(address instance, address user, bytes32 /*params*/) public view returns (uint256 bnIchi) {
         IERC20 bnIchiToken = IERC20(instance);
-        bnIchi = bnIchiToken.balanceOf(user);
+        bnIchi = bnIchiToken.balanceOf(user).div(NINE_DECIMALS);  //normalize to legacy ICHI 9 decimals
     }
 }
 
