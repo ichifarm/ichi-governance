@@ -1,0 +1,135 @@
+{
+  "address": "0x134fb1b3B3519187a43bE9789E7aC5473CAEb01a",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "DESCRIPTION",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "instance",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getPowah",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "instance",
+          "type": "address"
+        }
+      ],
+      "name": "getSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "supply",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x855cd2c7f213ebacc11087c94ae231cf69fa3c9c03fc5d8d26897dafb1282f5a",
+  "receipt": {
+    "to": null,
+    "from": "0xC30220fc19e2db669eaa3fa042C07b28F0c10737",
+    "contractAddress": "0x134fb1b3B3519187a43bE9789E7aC5473CAEb01a",
+    "transactionIndex": 81,
+    "gasUsed": "727006",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xafe1e1bbbebc85f52aa6e81eee17e3956da981e7c9d5ebdcca7ceafa5173080a",
+    "transactionHash": "0x855cd2c7f213ebacc11087c94ae231cf69fa3c9c03fc5d8d26897dafb1282f5a",
+    "logs": [],
+    "blockNumber": 15841640,
+    "cumulativeGasUsed": "9808856",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "solcInputHash": "7ce57f865a573dbe38030023a97123f4",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.3+commit.8d00100c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"DESCRIPTION\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"instance\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"getPowah\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"instance\",\"type\":\"address\"}],\"name\":\"getSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"supply\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"getPowah(address,address,bytes32)\":{\"params\":{\"instance\":\"address of the token for this interperter usage \",\"user\":\"wallet address\"}},\"getSupply(address)\":{\"params\":{\"instance\":\"the address of the token for this interperter usage\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getPowah(address,address,bytes32)\":{\"notice\":\"gets ICHI Powah in 9 decimals\"},\"getSupply(address)\":{\"notice\":\"returns total supply in 9 decimals\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interperters/TokenBalance.sol\":\"TokenBalance\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/math/SafeMath.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n// CAUTION\\n// This version of SafeMath should only be used with Solidity 0.8 or later,\\n// because it relies on the compiler's built in overflow checks.\\n\\n/**\\n * @dev Wrappers over Solidity's arithmetic operations.\\n *\\n * NOTE: `SafeMath` is no longer needed starting with Solidity 0.8. The compiler\\n * now has built in overflow checking.\\n */\\nlibrary SafeMath {\\n    /**\\n     * @dev Returns the addition of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            uint256 c = a + b;\\n            if (c < a) return (false, 0);\\n            return (true, c);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the substraction of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b > a) return (false, 0);\\n            return (true, a - b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            // Gas optimization: this is cheaper than requiring 'a' not being zero, but the\\n            // benefit is lost if 'b' is also tested.\\n            // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522\\n            if (a == 0) return (true, 0);\\n            uint256 c = a * b;\\n            if (c / a != b) return (false, 0);\\n            return (true, c);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the division of two unsigned integers, with a division by zero flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b == 0) return (false, 0);\\n            return (true, a / b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b == 0) return (false, 0);\\n            return (true, a % b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the addition of two unsigned integers, reverting on\\n     * overflow.\\n     *\\n     * Counterpart to Solidity's `+` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Addition cannot overflow.\\n     */\\n    function add(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a + b;\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, reverting on\\n     * overflow (when the result is negative).\\n     *\\n     * Counterpart to Solidity's `-` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Subtraction cannot overflow.\\n     */\\n    function sub(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a - b;\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, reverting on\\n     * overflow.\\n     *\\n     * Counterpart to Solidity's `*` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Multiplication cannot overflow.\\n     */\\n    function mul(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a * b;\\n    }\\n\\n    /**\\n     * @dev Returns the integer division of two unsigned integers, reverting on\\n     * division by zero. The result is rounded towards zero.\\n     *\\n     * Counterpart to Solidity's `/` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function div(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a / b;\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),\\n     * reverting when dividing by zero.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function mod(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a % b;\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on\\n     * overflow (when the result is negative).\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {trySub}.\\n     *\\n     * Counterpart to Solidity's `-` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Subtraction cannot overflow.\\n     */\\n    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        unchecked {\\n            require(b <= a, errorMessage);\\n            return a - b;\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the integer division of two unsigned integers, reverting with custom message on\\n     * division by zero. The result is rounded towards zero.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Counterpart to Solidity's `/` operator. Note: this function uses a\\n     * `revert` opcode (which leaves remaining gas untouched) while Solidity\\n     * uses an invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        unchecked {\\n            require(b > 0, errorMessage);\\n            return a / b;\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),\\n     * reverting with custom message when dividing by zero.\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {tryMod}.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        unchecked {\\n            require(b > 0, errorMessage);\\n            return a % b;\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x2526b7c6a366fc211bbc176078ab02b83833e7682abcc5b3bed9d700b34e2a3e\",\"license\":\"MIT\"},\"contracts/interperters/TokenBalance.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.3;\\n\\nimport \\\"@openzeppelin/contracts/utils/math/SafeMath.sol\\\";\\n\\n\\ninterface IERC20 {\\n    function balanceOf(address account) external view returns (uint256);\\n    function totalSupply() external view returns (uint256);\\n    function decimals() external view returns (uint8);\\n\\n}\\n\\nuint8 constant NORMAL = 9;\\n\\ncontract TokenBalance {\\n    using SafeMath for uint256;\\n\\n    string public DESCRIPTION = \\\"ICHIPowah Interperter for wallet balance\\\";\\n\\n\\n    /**\\n     * @notice returns total supply in 9 decimals\\n     * @param instance the address of the token for this interperter usage\\n     */\\n    function getSupply(address instance) public view returns (uint256 supply) {\\n        IERC20 token = IERC20(instance);\\n        if (token.decimals() > NORMAL) {\\n            supply = token.totalSupply().div(10 ** (token.decimals() - NORMAL));\\n        } else if(token.decimals() < NORMAL) {\\n            supply = token.totalSupply().mul(10 ** (NORMAL - token.decimals()));\\n        } else {\\n            supply = token.totalSupply();\\n        }\\n    }\\n\\n    /**\\n     * @notice gets ICHI Powah in 9 decimals\\n     * @param instance address of the token for this interperter usage \\n     * @param user wallet address\\n     */\\n    function getPowah(address instance, address user, bytes32 /*params*/) public view returns (uint256 balance) {\\n        IERC20 token = IERC20(instance);\\n        if (token.decimals() > NORMAL) {\\n            balance = token.balanceOf(user).div(10 ** (token.decimals() - NORMAL));\\n        } else if(token.decimals() < NORMAL) {\\n            balance = token.balanceOf(user).mul(10 ** (NORMAL - token.decimals()));\\n        } else {\\n            balance = token.balanceOf(user);\\n        }\\n    }\\n}\\n\\n\",\"keccak256\":\"0x7561b65b91c73f38b25741e8c8bccb7105083fb12c07bbfceb5ad5c7e2b7d658\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60e06040526028608081815290610c0260a039805161002691600091602090910190610039565b5034801561003357600080fd5b5061010d565b828054610045906100d2565b90600052602060002090601f01602090048101928261006757600085556100ad565b82601f1061008057805160ff19168380011785556100ad565b828001600101855582156100ad579182015b828111156100ad578251825591602001919060010190610092565b506100b99291506100bd565b5090565b5b808211156100b957600081556001016100be565b600181811c908216806100e657607f821691505b6020821081141561010757634e487b7160e01b600052602260045260246000fd5b50919050565b610ae68061011c6000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80631fd433aa14610046578063f1ae88561461006c578063ff80957714610081575b600080fd5b61005961005436600461080b565b610094565b6040519081526020015b60405180910390f35b61007461041c565b6040516100639190610899565b61005961008f366004610825565b6104aa565b600080829050600960ff16816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b1580156100d857600080fd5b505afa1580156100ec573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101109190610878565b60ff1611156102225761021b6009826001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b15801561015757600080fd5b505afa15801561016b573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061018f9190610878565b6101999190610a42565b6101a490600a610952565b826001600160a01b03166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b1580156101dd57600080fd5b505afa1580156101f1573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102159190610860565b906107d0565b9150610416565b600960ff16816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b15801561026057600080fd5b505afa158015610274573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102989190610878565b60ff1610156103a25761021b816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b1580156102dd57600080fd5b505afa1580156102f1573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103159190610878565b610320906009610a42565b61032b90600a610952565b826001600160a01b03166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b15801561036457600080fd5b505afa158015610378573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061039c9190610860565b906107e3565b806001600160a01b03166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b1580156103db57600080fd5b505afa1580156103ef573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104139190610860565b91505b50919050565b6000805461042990610a65565b80601f016020809104026020016040519081016040528092919081815260200182805461045590610a65565b80156104a25780601f10610477576101008083540402835291602001916104a2565b820191906000526020600020905b81548152906001019060200180831161048557829003601f168201915b505050505081565b600080849050600960ff16816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b1580156104ee57600080fd5b505afa158015610502573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105269190610878565b60ff161115610602576105fb6009826001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b15801561056d57600080fd5b505afa158015610581573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105a59190610878565b6105af9190610a42565b6105ba90600a610952565b6040516370a0823160e01b81526001600160a01b0387811660048301528416906370a082319060240160206040518083038186803b1580156101dd57600080fd5b91506107c8565b600960ff16816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b15801561064057600080fd5b505afa158015610654573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106789190610878565b60ff16101561074c576105fb816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b1580156106bd57600080fd5b505afa1580156106d1573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106f59190610878565b610700906009610a42565b61070b90600a610952565b6040516370a0823160e01b81526001600160a01b0387811660048301528416906370a082319060240160206040518083038186803b15801561036457600080fd5b6040516370a0823160e01b81526001600160a01b0385811660048301528216906370a082319060240160206040518083038186803b15801561078d57600080fd5b505afa1580156107a1573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906107c59190610860565b91505b509392505050565b60006107dc82846108ec565b9392505050565b60006107dc8284610a23565b80356001600160a01b038116811461080657600080fd5b919050565b60006020828403121561081c578081fd5b6107dc826107ef565b600080600060608486031215610839578182fd5b610842846107ef565b9250610850602085016107ef565b9150604084013590509250925092565b600060208284031215610871578081fd5b5051919050565b600060208284031215610889578081fd5b815160ff811681146107dc578182fd5b6000602080835283518082850152825b818110156108c5578581018301518582016040015282016108a9565b818111156108d65783604083870101525b50601f01601f1916929092016040019392505050565b60008261090757634e487b7160e01b81526012600452602481fd5b500490565b80825b600180861161091e5750610949565b81870482111561093057610930610a9a565b8086161561093d57918102915b9490941c93800261090f565b94509492505050565b60006107dc60001960ff85168460008261096e575060016107dc565b8161097b575060006107dc565b8160018114610991576002811461099b576109c8565b60019150506107dc565b60ff8411156109ac576109ac610a9a565b6001841b9150848211156109c2576109c2610a9a565b506107dc565b5060208310610133831016604e8410600b84101617156109fb575081810a838111156109f6576109f6610a9a565b6107dc565b610a08848484600161090c565b808604821115610a1a57610a1a610a9a565b02949350505050565b6000816000190483118215151615610a3d57610a3d610a9a565b500290565b600060ff821660ff841680821015610a5c57610a5c610a9a565b90039392505050565b600181811c90821680610a7957607f821691505b6020821081141561041657634e487b7160e01b600052602260045260246000fd5b634e487b7160e01b600052601160045260246000fdfea2646970667358221220bac4fd4158ec6b7c455acf0a9929cc24355338b52efa1853eae7d311b08b487164736f6c6343000803003349434849506f77616820496e74657270657274657220666f722077616c6c65742062616c616e6365",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c80631fd433aa14610046578063f1ae88561461006c578063ff80957714610081575b600080fd5b61005961005436600461080b565b610094565b6040519081526020015b60405180910390f35b61007461041c565b6040516100639190610899565b61005961008f366004610825565b6104aa565b600080829050600960ff16816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b1580156100d857600080fd5b505afa1580156100ec573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101109190610878565b60ff1611156102225761021b6009826001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b15801561015757600080fd5b505afa15801561016b573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061018f9190610878565b6101999190610a42565b6101a490600a610952565b826001600160a01b03166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b1580156101dd57600080fd5b505afa1580156101f1573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102159190610860565b906107d0565b9150610416565b600960ff16816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b15801561026057600080fd5b505afa158015610274573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102989190610878565b60ff1610156103a25761021b816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b1580156102dd57600080fd5b505afa1580156102f1573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103159190610878565b610320906009610a42565b61032b90600a610952565b826001600160a01b03166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b15801561036457600080fd5b505afa158015610378573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061039c9190610860565b906107e3565b806001600160a01b03166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b1580156103db57600080fd5b505afa1580156103ef573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104139190610860565b91505b50919050565b6000805461042990610a65565b80601f016020809104026020016040519081016040528092919081815260200182805461045590610a65565b80156104a25780601f10610477576101008083540402835291602001916104a2565b820191906000526020600020905b81548152906001019060200180831161048557829003601f168201915b505050505081565b600080849050600960ff16816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b1580156104ee57600080fd5b505afa158015610502573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105269190610878565b60ff161115610602576105fb6009826001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b15801561056d57600080fd5b505afa158015610581573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105a59190610878565b6105af9190610a42565b6105ba90600a610952565b6040516370a0823160e01b81526001600160a01b0387811660048301528416906370a082319060240160206040518083038186803b1580156101dd57600080fd5b91506107c8565b600960ff16816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b15801561064057600080fd5b505afa158015610654573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106789190610878565b60ff16101561074c576105fb816001600160a01b031663313ce5676040518163ffffffff1660e01b815260040160206040518083038186803b1580156106bd57600080fd5b505afa1580156106d1573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106f59190610878565b610700906009610a42565b61070b90600a610952565b6040516370a0823160e01b81526001600160a01b0387811660048301528416906370a082319060240160206040518083038186803b15801561036457600080fd5b6040516370a0823160e01b81526001600160a01b0385811660048301528216906370a082319060240160206040518083038186803b15801561078d57600080fd5b505afa1580156107a1573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906107c59190610860565b91505b509392505050565b60006107dc82846108ec565b9392505050565b60006107dc8284610a23565b80356001600160a01b038116811461080657600080fd5b919050565b60006020828403121561081c578081fd5b6107dc826107ef565b600080600060608486031215610839578182fd5b610842846107ef565b9250610850602085016107ef565b9150604084013590509250925092565b600060208284031215610871578081fd5b5051919050565b600060208284031215610889578081fd5b815160ff811681146107dc578182fd5b6000602080835283518082850152825b818110156108c5578581018301518582016040015282016108a9565b818111156108d65783604083870101525b50601f01601f1916929092016040019392505050565b60008261090757634e487b7160e01b81526012600452602481fd5b500490565b80825b600180861161091e5750610949565b81870482111561093057610930610a9a565b8086161561093d57918102915b9490941c93800261090f565b94509492505050565b60006107dc60001960ff85168460008261096e575060016107dc565b8161097b575060006107dc565b8160018114610991576002811461099b576109c8565b60019150506107dc565b60ff8411156109ac576109ac610a9a565b6001841b9150848211156109c2576109c2610a9a565b506107dc565b5060208310610133831016604e8410600b84101617156109fb575081810a838111156109f6576109f6610a9a565b6107dc565b610a08848484600161090c565b808604821115610a1a57610a1a610a9a565b02949350505050565b6000816000190483118215151615610a3d57610a3d610a9a565b500290565b600060ff821660ff841680821015610a5c57610a5c610a9a565b90039392505050565b600181811c90821680610a7957607f821691505b6020821081141561041657634e487b7160e01b600052602260045260246000fd5b634e487b7160e01b600052601160045260246000fdfea2646970667358221220bac4fd4158ec6b7c455acf0a9929cc24355338b52efa1853eae7d311b08b487164736f6c63430008030033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "getPowah(address,address,bytes32)": {
+        "params": {
+          "instance": "address of the token for this interperter usage ",
+          "user": "wallet address"
+        }
+      },
+      "getSupply(address)": {
+        "params": {
+          "instance": "the address of the token for this interperter usage"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getPowah(address,address,bytes32)": {
+        "notice": "gets ICHI Powah in 9 decimals"
+      },
+      "getSupply(address)": {
+        "notice": "returns total supply in 9 decimals"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 1021,
+        "contract": "contracts/interperters/TokenBalance.sol:TokenBalance",
+        "label": "DESCRIPTION",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_string_storage"
+      }
+    ],
+    "types": {
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

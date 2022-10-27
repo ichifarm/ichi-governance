@@ -11,6 +11,7 @@ import 'hardhat-gas-reporter'
 import 'hardhat-spdx-license-identifier'
 import 'dotenv/config'
 import "hardhat-watcher";
+import { hardhatArguments } from 'hardhat';
 
 //import { HardhatUserConfig } from "hardhat/types";
 
@@ -32,6 +33,9 @@ const config: HardhatUserConfig = {
     enabled: process.env.REPORT_GAS === "true",
     excludeContracts: ["contracts/mocks/", "contracts/libraries/"],
   },
+  mocha: {
+    timeout: 100000000
+  },
   namedAccounts: {
     deployer: {
       default: 0
@@ -48,7 +52,7 @@ const config: HardhatUserConfig = {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: [`0x${process.env.MAINNET_PK}`],
       saveDeployments: true,
-      gasPrice: 20 * 1000000000,
+      gasPrice: 30 * 1000000000,
       chainId: 1,
     },
     localhost: {
@@ -58,21 +62,22 @@ const config: HardhatUserConfig = {
     },
     hardhat: {
       forking: {
-        enabled: process.env.FORKING === "false",
-        url: `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
+        enabled: process.env.FORKING === "true",
+        url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+        blockNumber: 13011904,
       },
       live: false,
       saveDeployments: true,
       tags: ["test", "local"],
     },
-    kovan: {
-      url: `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
+    goerli: {
+      url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: [`0x${process.env.TESTNET_PK}`],
-      chainId: 42,
+      chainId: 5,
       live: true,
       saveDeployments: true,
       tags: ["staging"],
-      gasPrice: 20000000000,
+      gasPrice: 100000000000,
       gasMultiplier: 2
     },
   },
