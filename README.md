@@ -4,14 +4,12 @@
 
 This repository specifies ICHI protocol's governance structure. Notably, ICHI follows proof-of-stake style voting, i.e, your voting power (ICHI Powah) is determined by the size of your investment in the system. As of now, we compute a user's stake using their participation across - 
 
- 1. [xICHI](https://etherscan.io/tx/0xa08579b0a5768740524ed0f87edc606ecff7265b826403ccd41add93897f2272)  
- 2. [ICHI-1INCH](https://etherscan.io/tx/0x4886acb6154e8896039eefa7a6dbed8c31c8b13839bb629785149692aa62a417)  
- 3. [ICHI-ETH Sushi](https://etherscan.io/tx/0x587f4bbe20ccd357c03b6ec6f75c671b787112dc12221bd4d910d24aa171a09c)   
- 4. [ICHI-ETH 80/20 Balancer](https://etherscan.io/tx/0x8a73f6130f6fcc21e2fc13b004e45354ac0959eae123e94e01c1a6bca1fe5ee1) 
- 5. [ICHI-LINK](https://etherscan.io/tx/0x494aff2dd887b62098d276d5a2a0ba2241fc9fc1c43cba3fb9535ef8551d4927) 
- 6. [ICHI-ETH Uni](https://etherscan.io/tx/0x6076ee7b84ae157cd22197c158f0100096d06e6903c4e35bbaf3d65dde351e07) 
- 7. [ICHI-BNT LP V2](https://etherscan.io/tx/0xfaa3a4ad453f60f56cf747a1b0df635f2e542a4cc1f948c196ad9bd4ab650452)  
- 8. ICHI-BNT LP V3
+ 1. [xICHI](https://etherscan.io/tx/0xa08579b0a5768740524ed0f87edc606ecff7265b826403ccd41add93897f2272)   
+ 2. [ICHI-ETH Sushi](https://etherscan.io/tx/0x9c0dd78fc9e347c8e67d34522804feab85f0e6c85e1ed90ee96921b214037012)    
+ 3. [ICHI-ETH Uni](https://etherscan.io/tx/0x9c0dd78fc9e347c8e67d34522804feab85f0e6c85e1ed90ee96921b214037012)   
+ 4. [ICHI-BNT LP V3](https://etherscan.io/tx/0x564cee1b70128e12807b8555d0aae38bad6473b6d93a408e47d1088b28db58fe)
+ 5. [ICHI Wallet Balance](https://etherscan.io/tx/0x1974bda475b778a5b620a9ac1c7fc19b85bf1bfcef64b24563af87e215f1e24a)
+ 6. [ICHI Legacy Wallet Balance](https://etherscan.io/tx/0x1974bda475b778a5b620a9ac1c7fc19b85bf1bfcef64b24563af87e215f1e24a)
 
 As more partnerships and products are announced, we will be adding them here as well. 
 
@@ -72,7 +70,8 @@ This is a contract template that that implements ISatelite and acts as the mediu
  3. [ICHI-ETH Sushi Farm](https://etherscan.io/address/0x822b94df15fe9c60b35796be7b1e5e15ee225dd3)
  4. [ICHI LP in ICHI Farm](https://etherscan.io/address/0x7c49fc7110ef49d080f1d0cfc57fad5f21515014)
  5. [ICHI in Bancor LP](https://etherscan.io/address/0x43f1cacdacd3fa65dbcbd56604b90e077fffbb83)
- 6. ICHI in Bancor V3
+ 6. [ICHI in Bancor V3](https://etherscan.io/address/0x8C261C87288dd5E2dc462FA0fD4C6399a7F102eF)
+ 7. [ICHI Wallet](https://etherscan.io/address/0x134fb1b3B3519187a43bE9789E7aC5473CAEb01a)
 
  ### Legacy and retired contracts
 
