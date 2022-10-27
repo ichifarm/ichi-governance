@@ -7,8 +7,33 @@ import { SushiICHIPowah } from "../typechain/sushiICHIPowah";
 import { XICHIPowah } from "../typechain/xICHIPowah";
 import { ICHIPowah } from "../typechain/ICHIPowah";
 import { BigNumber } from 'ethers'
+import { TokenBalance } from "../typechain/TokenBalance";
 
 import { Fixture } from "ethereum-waffle";
+
+interface ICHIWalletPowahFixture {
+  ICHILegacy: string;
+  ICHI: string;
+  ICHIWalletFixture: TokenBalance;
+  ICHIWallet: string;
+  Decimals8Wallet: string;
+  Decimals8Token: string;
+}
+
+export async function ICHIWalletPowahFixture(): Promise<ICHIWalletPowahFixture> {
+  const ichiWalletFactory = await ethers.getContractFactory("TokenBalance");
+  const ICHIWalletFixture = (await ichiWalletFactory.deploy()) as TokenBalance;
+
+  const ICHILegacy = '0x903bEF1736CDdf2A537176cf3C64579C3867A881';
+  const ICHI = '0x111111517e4929D3dcbdfa7CCe55d30d4B6BC4d6';
+
+  const ICHIWallet = '0x125aaf123057f41f3eb0415bbdacfcd2b66c4ec6';
+
+  const Decimals8Wallet = '0x1622f1bef90233a6993f3bc85759adf5b9d9d7b9';
+  const Decimals8Token = '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599';
+
+  return { ICHILegacy, ICHI, ICHIWalletFixture , ICHIWallet, Decimals8Wallet, Decimals8Token};
+}
 
 interface BnICHIPowahFixture {
   bnICHIAddress: string;
